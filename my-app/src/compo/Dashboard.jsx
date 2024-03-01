@@ -1,177 +1,21 @@
-import React from 'react'
-import Navbar from './Navbar'
+import React, { useEffect, useState } from 'react'
+import { listBooks, listIssued, listRecord, listReturned } from '../appwrite/database';
 
 export default function Dashboard() {
+    const [books, setBooks] = useState(0)
+    const [record, setREcord] = useState(0)
+    const [Issued, setIssued] = useState(0);
+    const [returnbook, setReturnbook] = useState(0)
+
+    useEffect(() => {
+        listBooks(res => setBooks(res))
+        listRecord(res => setREcord(res))
+        listIssued(res => setIssued(res))
+        listReturned(res => setReturnbook(res))
+        console.log(books);
+    }, [])
     return (
         <>
-            <div class="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample"
-                aria-labelledby="offcanvasExampleLabel">
-
-
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav">
-
-                        {/* <!-- This is for add code and Dashboard --> */}
-
-                        <li class="nav-item">
-                            <div class="text-secondary small text-uppercase fw-bold"> Core</div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./dashboard.html">
-                                <i class="fa-solid fa-table-columns me-2"> </i>Dashboard</a>
-                        </li>
-
-                        <li class="nav-item my-0">
-                            <hr />
-                        </li>
-
-                        {/* <!-- end --> */}
-
-                        {/* <!-- This for  Books Management --> */}
-                        <li class="nav-item">
-                            <div class="text-secondary small text-uppercase fw-bold"> Inventory </div>
-                        </li>
-
-                        <li class="nav-item">
-
-                            <a class="nav-link sidebar-link " data-bs-toggle="collapse" href="#booksMgmt" role="button"
-                                aria-expanded="false" aria-controls="booksMgmt">
-                                <i class="fa-solid fa-book me-1"></i> Books Management
-                                <span class="right-icon float-end"> <i class="fa-solid fa-chevron-down "></i></span>
-                            </a>
-
-                            <div class="collapse" id="booksMgmt">
-                                <div>
-                                    <ul class="navbar-nav ps-3">
-                                        <li>
-                                            <a href="./add-book.html" class="nav-link ">
-                                                <i class="fa-solid fa-plus me-2"></i> Add New
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="manage-books.html" class="nav-link ">
-                                                <i class="fa-solid fa-list me-2"></i> Manage All
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-
-
-                        <li class="nav-item">
-
-                            <a class="nav-link sidebar-link " data-bs-toggle="collapse" href="#studentMGMT" role="button"
-                                aria-expanded="false" aria-controls="studentMGMT">
-                                <i class="fa-solid fa-users me-1"></i> Students Management
-                                <span class="right-icon float-end"> <i class="fa-solid fa-chevron-down "></i></span>
-                            </a>
-
-                            <div class="collapse" id="studentMGMT">
-                                <div>
-                                    <ul class="navbar-nav ps-3">
-                                        <li>
-                                            <a href="./add-student.html" class="nav-link ">
-                                                <i class="fa-solid fa-plus me-2"></i> Add New
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="./manage-student.html" class="nav-link ">
-                                                <i class="fa-solid fa-list me-2"></i> Manage All
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-
-
-
-                        <li class="nav-item my-0">
-                            <hr />
-                        </li>
-
-
-                        <li class="nav-item">
-                            <div class="text-secondary small text-uppercase fw-bold"> Action </div>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link sidebar-link " data-bs-toggle="collapse" href="#issuedMGMT" role="button"
-                                aria-expanded="false" aria-controls="issuedMGMT">
-                                <i class="fa-solid fa-book-open me-1"></i> Provide Books
-                                <span class="right-icon float-end"> <i class="fa-solid fa-chevron-down "></i></span>
-                            </a>
-
-                            <div class="collapse" id="issuedMGMT">
-                                <div>
-                                    <ul class="navbar-nav ps-3">
-                                        <li>
-                                            <a href="./issue-book.html" class="nav-link ">
-                                                <i class="fa-solid fa-hand-holding-hand me-2"></i>Issue Books
-
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="manage-issued-books.html./manage-books.html" class="nav-link ">
-                                                <i class="fa-solid fa-list-check me-2"></i> Manage Issued Books
-                                            </a>
-                                        </li>
-
-
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link sidebar-link " data-bs-toggle="collapse" href="#ReturnMGMT" role="button"
-                                aria-expanded="false" aria-controls="ReturnMGMT">
-                                <i class="fa-solid fa-right-left me-2"></i> Return Books
-                                <span class="right-icon float-end"> <i class="fa-solid fa-chevron-down "></i></span>
-                            </a>
-
-                            <div class="collapse" id="ReturnMGMT">
-                                <div>
-                                    <ul class="navbar-nav ps-3">
-                                        <li>
-                                            <a href="#" class="nav-link ">
-                                                <i class="fa-solid fa-square-envelope me-2">
-                                                </i>Notification
-
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="nav-link ">
-                                                <i class="fa-solid fa-arrow-right-arrow-left me-2"></i> Return History
-                                            </a>
-                                        </li>
-
-
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-
-
-                        <li class="nav-item my-0">
-                            <hr />
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
-                                <i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
 
 
             <div>
@@ -355,7 +199,7 @@ export default function Dashboard() {
                                     <div class="card-body text-center">
                                         <h5 class="card-title text-uppercase text-muted">Total Books</h5>
 
-                                        <h1>130</h1>
+                                        <h1>{books && books.length}</h1>
 
                                         <a href="#" class="card-link link-underline-light">View More</a>
 
@@ -368,7 +212,7 @@ export default function Dashboard() {
                                     <div class="card-body text-center">
                                         <h5 class="card-title text-uppercase text-muted">Total Students</h5>
 
-                                        <h1>130</h1>
+                                        <h1>{record && record.length}</h1>
 
                                         <a href="#" class="card-link link-underline-light">View More</a>
 
@@ -381,7 +225,7 @@ export default function Dashboard() {
                                     <div class="card-body text-center">
                                         <h5 class="card-title text-uppercase text-muted">issued Books</h5>
 
-                                        <h1>130</h1>
+                                        <h1>{Issued && Issued.length}</h1>
 
                                         <a href="#" class="card-link link-underline-light">View More</a>
 
@@ -393,7 +237,7 @@ export default function Dashboard() {
                                     <div class="card-body text-center">
                                         <h5 class="card-title text-uppercase text-muted">Return Books</h5>
 
-                                        <h1>130</h1>
+                                        <h1>{returnbook && returnbook.length}</h1>
 
                                         <a href="#" class="card-link link-underline-light">View More</a>
 
@@ -435,6 +279,22 @@ export default function Dashboard() {
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                {
+                                                    // books && books.map((item, index) => {
+                                                    //     return (
+                                                    //         <tr>
+                                                    //             <th scope="row">{index + 1}</th>
+                                                    //             <td>{item["book-name"]}</td>
+                                                    //             <td>{item["ISBN-number"]}</td>
+                                                    //             <td>{item["publisher-name"]}</td>
+                                                    //             <td>{item["author-name"]}</td>
+                                                    //             <td>
+                                                    //                 <span class="badge text-bg-success">Active</span>
+                                                    //             </td>
+                                                    //         </tr>
+                                                    //     )
+                                                    // })
+                                                }
                                                 <tr>
                                                     <th scope="row">1</th>
                                                     <td>Aniket</td>
@@ -444,33 +304,7 @@ export default function Dashboard() {
                                                         <span class="badge text-bg-success">Active</span>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        <span class="badge text-bg-success">Active</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        <span class="badge text-bg-danger">Inactive</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">4</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        <span class="badge text-bg-success">Active</span>
-                                                    </td>
-                                                </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -487,42 +321,20 @@ export default function Dashboard() {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        01-02-2024, 12:20 PM
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        01-02-2024, 12:20 PM
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        01-02-2024, 12:20 PM
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">4</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        01-02-2024, 12:20 PM
-                                                    </td>
-                                                </tr>
+
+                                                {
+                                                    Issued && Issued.map((item, index) => {
+                                                        return (
+                                                            <tr>
+                                                                <th scope="row">{index + 1}</th>
+                                                                <td>{item["student-name"]}</td>
+                                                                <td>{item["book-name"]}</td>
+                                                                <td>{item["issued-date"]}</td>
+                                                                <td>{item["return-date"]}</td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
                                             </tbody>
                                         </table>
 
@@ -533,49 +345,31 @@ export default function Dashboard() {
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Subject</th>
-                                                    <th scope="col">Return On</th>
+                                                    <th scope="col">Book Name</th>
+                                                    <th scope="col">Student Name</th>
+                                                    <th scope="col">Issued Date</th>
+                                                    <th scope="col">Return Date</th>
                                                     <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        <span class="badge text-bg-warning">Returned</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        <span class="badge text-bg-success">Active</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        <span class="badge text-bg-danger">Returned</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">4</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        <span class="badge text-bg-success">Active</span>
-                                                    </td>
-                                                </tr>
+                                                {returnbook &&
+                                                    returnbook.map((item, index) => {
+                                                        return (
+                                                            <tr>
+                                                                <th scope="row">{index + 1}</th>
+                                                                <td>{item["book-name"]}</td>
+                                                                <td>{item["student-name"]}</td>
+                                                                <td>{item["issued-date"]}</td>
+                                                                <td>{item["return-date"]}</td>
+                                                                <td>
+                                                                    <span class="badge text-bg-success">Active</span>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+
                                             </tbody>
                                         </table>
                                     </div>

@@ -27,6 +27,74 @@ const createBook = (bookName, isbn, authorName, PubName, course, sem) => {
     });
   // databases.createDocument()
 };
+ 
+const returnbook = (bookname, stdname, idate, rdate , id) => {
+  databases
+    .createDocument(
+      String(process.env.REACT_APP_DATABASE_ID),
+      process.env.REACT_APP_RETURN_SECTION,
+      ID.unique(),
+      {
+        "book-name": bookname,
+        "student-name": stdname,
+        "issued-date": idate,
+        "return-date": rdate,
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      if(res.$id){
+        deleteissued(id);
+      }
+      return res;
+    })
+    .catch((er) => {
+      console.log(er.message);
+      return false;
+    });
+};
+const listReturned = (callback)=>{
+  databases
+    .listDocuments(
+      String(process.env.REACT_APP_DATABASE_ID),
+      process.env.REACT_APP_RETURN_SECTION
+    )
+    .then((res) => {
+      callback(res.documents);
+      
+      console.log(res);
+      
+    })
+    .catch((er) => {
+      console.log(er.message);
+      callback(false);
+    });
+
+}
+const issueBook = (bookName, stdName, idate, rdate) => {
+  console.log(String(process.env.REACT_APP_DATABASE_ID));
+  databases
+    .createDocument(
+      String(process.env.REACT_APP_DATABASE_ID),
+      process.env.REACT_APP_MANAGE_ISSUED,
+      ID.unique(),
+      {
+        "book-name": bookName,
+        "student-name": stdName,
+        "Issued-date": idate,
+        "return-date": rdate,
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .catch((er) => {
+      console.log(er.message);
+      return false;
+    });
+  // databases.createDocument()
+};
 const createRecord = (stdName, enr, email, mob, course, sem) => {
   databases
     .createDocument(
@@ -38,8 +106,8 @@ const createRecord = (stdName, enr, email, mob, course, sem) => {
         "enrollment-number": enr,
         "email-address": email,
         "phone-number": mob,
-        "course": course,
-        "semester": sem,
+        course: course,
+        semester: sem,
       }
     )
     .then((res) => {
@@ -51,22 +119,98 @@ const createRecord = (stdName, enr, email, mob, course, sem) => {
       return false;
     });
 };
-const listRecord = (callback)=>{
-  let a ;
- a = databases.listDocuments(process.env.REACT_APP_DATABASE_ID,process.env.REACT_APP_STD)
-  .then((res)=>{
-    // console.log(res.documents);
-    a = res.documents
-    callback(a)
-    // return res.documents;
-  })
-  .catch((er)=>{
-    console.log(er.message);
-    callback(false)
-  })
-}
-const deleteRecord = (id)=>{
-databases.deleteDocument(process.env.REACT_APP_DATABASE_ID, process.env.REACT_APP_STD, id)
-window.location.reload()
-}
-export { createBook, createRecord , deleteRecord,listRecord};
+const listRecord = (callback) => {
+  let a;
+  a = databases
+    .listDocuments(process.env.REACT_APP_DATABASE_ID, process.env.REACT_APP_STD)
+    .then((res) => {
+      // console.log(res.documents);
+      a = res.documents;
+      callback(a);
+      // return res.documents;
+    })
+    .catch((er) => {
+      console.log(er.message);
+      callback(false);
+    });
+};
+const listBooks = (callback) => {
+  databases
+    .listDocuments(
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_BOOK
+    )
+    .then((res) => {
+      // console.log(res.documents);
+
+      callback(res);
+      // return res.documents;
+    })
+    .catch((er) => {
+      console.log(er.message);
+      callback(false);
+    });
+};
+
+const listIssued = (callback) => {
+  databases
+    .listDocuments(
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_MANAGE_ISSUED
+    )
+    .then((res) => {
+      // console.log(res.documents);
+
+      callback(res.documents);
+      // return res.documents;
+    })
+    .catch((er) => {
+      console.log(er.message);
+      callback(false);
+    });
+};
+const deleteRecord = (id) => {
+  databases.deleteDocument(
+    process.env.REACT_APP_DATABASE_ID,
+    process.env.REACT_APP_STD,
+    id
+  );
+  window.location.reload();
+};
+const deleteBook = (id) => {
+  databases.deleteDocument(
+    process.env.REACT_APP_DATABASE_ID,
+    process.env.REACT_APP_BOOK,
+    id
+  );
+  window.location.reload();
+};
+const deleteissued = (id) => {
+  databases.deleteDocument(
+    process.env.REACT_APP_DATABASE_ID,
+    process.env.REACT_APP_MANAGE_ISSUED,
+    id
+  );
+};
+const delRet = (id) => {
+  databases.deleteDocument(
+    process.env.REACT_APP_DATABASE_ID,
+    process.env.REACT_APP_RETURN_SECTION,
+    id
+  );
+};
+
+export {
+  createBook,
+  createRecord,
+  listBooks,
+  returnbook,
+  listIssued,
+  deleteRecord,
+  issueBook,
+  delRet,
+  deleteBook,
+  listReturned,
+  deleteissued,
+  listRecord,
+};

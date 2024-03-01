@@ -28,4 +28,7 @@ const login = (email,pass)=>{
         return false;
     })
 }
-export {CreateUser,databases, login};
+const logoutf = ()=>{
+ account.deleteSession("current"); 
+}
+export {CreateUser,databases,logoutf, login};
