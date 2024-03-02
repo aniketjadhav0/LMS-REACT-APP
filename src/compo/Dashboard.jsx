@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { listBooks, listIssued, listRecord, listReturned } from '../appwrite/database';
-import { sendMail } from '../mail/nodemailer';
 
 export default function Dashboard() {
     // eslint-disable-next-line
@@ -9,17 +8,14 @@ export default function Dashboard() {
     const [Issued, setIssued] = useState(0);
     const [returnbook, setReturnbook] = useState(0)
 
-    // useEffect(() => {
-    listBooks(res => setBooks(res.documents))
-    listRecord(res => setREcord(res))
-    listIssued(res => setIssued(res))
-    listReturned(res => setReturnbook(res))
-    //  console.log(books);
-    // })
-    const handl = () => {
-        sendMail("omvakhare150@gmail.com", "hey there test 1");
+    useEffect(() => {
+        listBooks(res => setBooks(res.documents))
+        listRecord(res => setREcord(res))
+        listIssued(res => setIssued(res))
+        listReturned(res => setReturnbook(res))
+        //  console.log(books);
+    })
 
-    }
     return (
         <>
 
@@ -34,7 +30,7 @@ export default function Dashboard() {
 
                         <div className="row dashboard-counts">
                             <div className="col-md-12">
-                                <h4 className="fw-bold text-uppercase" onClick={handl}> Dashboard </h4>
+                                <h4 className="fw-bold text-uppercase" > Dashboard </h4>
                                 <p>Statistics of the system!</p>
                             </div>
 
@@ -124,38 +120,31 @@ export default function Dashboard() {
                                             <thead className="table-dark">
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Preparing for</th>
-                                                    <th scope="col">Registered on</th>
+                                                    <th scope="col">Book Name</th>
+                                                    <th scope="col">ISBN NO</th>
+                                                    <th scope="col">PUB NO</th>
+                                                    <th scope="col">AUTHOR NAME</th>
                                                     <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {
-                                                    // books && books.map((item, index) => {
-                                                    //     return (
-                                                    //         <tr>
-                                                    //             <th scope="row">{index + 1}</th>
-                                                    //             <td>{item["book-name"]}</td>
-                                                    //             <td>{item["ISBN-number"]}</td>
-                                                    //             <td>{item["publisher-name"]}</td>
-                                                    //             <td>{item["author-name"]}</td>
-                                                    //             <td>
-                                                    //                 <span className="badge text-bg-success">Active</span>
-                                                    //             </td>
-                                                    //         </tr>
-                                                    //     )
-                                                    // })
+                                                    books && books.map((item, index) => {
+                                                        return (
+                                                            <tr>
+                                                                <th scope="row">{index + 1}</th>
+                                                                <td>{item["book-name"]}</td>
+                                                                <td>{item["ISBN-number"]}</td>
+                                                                <td>{item["publisher-name"]}</td>
+                                                                <td>{item["author-name"]}</td>
+                                                                <td>
+                                                                    <span className="badge text-bg-success">Active</span>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
                                                 }
-                                                <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Aniket</td>
-                                                    <td>CM</td>
-                                                    <td>01-02-2024, 12:20 PM</td>
-                                                    <td>
-                                                        <span className="badge text-bg-success">Active</span>
-                                                    </td>
-                                                </tr>
+
 
                                             </tbody>
                                         </table>

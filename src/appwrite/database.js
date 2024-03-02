@@ -2,8 +2,8 @@ import { ID } from "appwrite";
 import { databases } from "./appwrite";
 
 // creation
-const createBook = (bookName, isbn, authorName, PubName, course, sem ,cb) => {
-   databases
+const createBook = (bookName, isbn, authorName, PubName, course, sem, cb) => {
+  databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
       process.env.REACT_APP_BOOK,
@@ -18,13 +18,13 @@ const createBook = (bookName, isbn, authorName, PubName, course, sem ,cb) => {
       }
     )
     .catch((er) => {
-      cb(er.message)
+      cb(er.message);
       // console.log(er.message);
     });
   // databases.createDocument()
 };
- 
-const returnbook = (bookname, stdname, idate, rdate , id) => {
+
+const returnbook = (bookname, stdname, idate, rdate, id) => {
   databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
@@ -39,7 +39,7 @@ const returnbook = (bookname, stdname, idate, rdate , id) => {
     )
     .then((res) => {
       // console.log(res);
-      if(res.$id){
+      if (res.$id) {
         deleteissued(id);
       }
       return res;
@@ -50,8 +50,8 @@ const returnbook = (bookname, stdname, idate, rdate , id) => {
     });
 };
 
-const issueBook = (bookName, stdName, idate, rdate,cb) => {
-   databases
+const issueBook = (bookName, stdName, idate, rdate, cb) => {
+  databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
       process.env.REACT_APP_MANAGE_ISSUED,
@@ -64,11 +64,11 @@ const issueBook = (bookName, stdName, idate, rdate,cb) => {
       }
     )
     .catch((er) => {
-      cb(er.message)
+      cb(er.message);
     });
   // databases.createDocument()
 };
-const createRecord = (stdName, enr, email, mob, course, sem ,cb) => {
+const createRecord = (stdName, enr, email, mob, course, sem, cb) => {
   databases
     .createDocument(
       process.env.REACT_APP_DATABASE_ID,
@@ -83,7 +83,7 @@ const createRecord = (stdName, enr, email, mob, course, sem ,cb) => {
         semester: sem,
       }
     )
-     
+
     .catch((er) => {
       cb(er.message);
     });
@@ -122,7 +122,7 @@ const listBooks = (callback) => {
       callback(false);
     });
 };
-const listReturned = (callback)=>{
+const listReturned = (callback) => {
   databases
     .listDocuments(
       String(process.env.REACT_APP_DATABASE_ID),
@@ -130,16 +130,14 @@ const listReturned = (callback)=>{
     )
     .then((res) => {
       callback(res.documents);
-      
+
       // console.log(res);
-      
     })
     .catch((er) => {
       // console.log(er.message);
       callback(false);
     });
-
-}
+};
 const listIssued = (callback) => {
   databases
     .listDocuments(
@@ -182,6 +180,7 @@ const deleteissued = (id) => {
     process.env.REACT_APP_MANAGE_ISSUED,
     id
   );
+  window.location.reload();
 };
 const delRet = (id) => {
   databases.deleteDocument(
@@ -189,6 +188,7 @@ const delRet = (id) => {
     process.env.REACT_APP_RETURN_SECTION,
     id
   );
+  window.location.reload();
 };
 
 export {

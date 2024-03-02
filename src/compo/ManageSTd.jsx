@@ -44,7 +44,7 @@ export default function ManageSTd() {
                                                 isRecord ?
                                                     record.map((item, index) => {
                                                         return (<tr key={index}>
-                                                            <th scope="row">{index}</th>
+                                                            <th scope="row">{index + 1}</th>
                                                             <td>{item["student-name"]}</td>
                                                             <td>{item["enrollment-number"]}</td>
                                                             <td>{item["email-address"]} </td>

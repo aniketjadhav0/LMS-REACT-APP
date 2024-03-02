@@ -6,7 +6,7 @@ export default function ManBooks() {
     const [book, setBooks] = React.useState([]);
     useEffect(() => {
         listBooks(res => {
-            setBooks(res);
+            setBooks(res.documents);
         })
     }, [])
     return (
@@ -43,14 +43,14 @@ export default function ManBooks() {
                                                 book &&
                                                 book.map((item, index) => {
                                                     return (<tr key={index}>
-                                                        <th scope="row">{index+1}</th>
+                                                        <th scope="row">{index + 1}</th>
                                                         <td>{item["book-name"]}</td>
                                                         <td>{item["ISBN-number"]}</td>
                                                         <td>{item["publisher-name"]}</td>
                                                         <td>{item["author-name"]}</td>
                                                         <td>
-                                                            <div   className="btn  btn-primary btn-sm">Edit </div>
-                                                            <div   onClick={() => deleteBook(item.$id)} className="btn btn-danger btn-sm">Delete </div>
+                                                            <div className="btn  btn-primary btn-sm">Edit </div>
+                                                            <div onClick={() => deleteBook(item.$id)} className="btn btn-danger btn-sm">Delete </div>
                                                         </td>
                                                     </tr>)
 

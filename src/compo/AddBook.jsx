@@ -31,9 +31,9 @@ export default function AddBook() {
             setString("Please fill all the fields")
             setError(true);
         }
-        if (errorString === ""){
+        if (errorString === "") {
             setError(true)
-            errorString = "Operation Success"
+            setString("Operation Success")
         }
 
     }

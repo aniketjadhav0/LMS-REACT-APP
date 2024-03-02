@@ -1,7 +1,8 @@
-import axios from 'axios';
+ 
 import React, { useEffect, useState } from 'react'
 import { Modal, Button } from 'react-bootstrap';
 import { deleteissued, listIssued, returnbook } from '../appwrite/database';
+import sendMail from "./../mail/nodemailer"
 
 export default function ManageIssueBook() {
 
@@ -18,11 +19,7 @@ export default function ManageIssueBook() {
     const handleClose = async () => {
         setShowModal(false);
         try {
-
-            await axios.post('http://localhost:3005/send-email', {
-                to: userMail,
-                text: mail
-            });
+            sendMail(userMail, mail);
         } catch (error) {
             console.log(error);
         }
