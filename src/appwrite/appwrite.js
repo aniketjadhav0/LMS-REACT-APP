@@ -1,4 +1,4 @@
-import { Client , Databases , Account, ID} from "appwrite";
+import { Client , Databases , Account, ID, Functions} from "appwrite";
 
 const client = new Client()
 client.setEndpoint(process.env.REACT_APP_APPWRITE_PROJECT_ID);
@@ -6,6 +6,8 @@ client.setProject(process.env.REACT_APP_APPWRITE_END_POINT);
 
 const account = new Account(client);
 const databases = new Databases(client);
+const func = new Functions(client)
+
 const CreateUser = ({email , pass})=>{
     if(email !== "" && pass !== ""){
 
@@ -31,4 +33,4 @@ const login = (email,pass,cb)=>{
 const logoutf = ()=>{
  account.deleteSession("current"); 
 }
-export {CreateUser,databases,logoutf, login};
+export {CreateUser,databases,logoutf,func, login};

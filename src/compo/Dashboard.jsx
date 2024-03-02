@@ -1,187 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import { listBooks, listIssued, listRecord, listReturned } from '../appwrite/database';
+import React, {  useState } from 'react'
+import {  listIssued, listRecord, listReturned } from '../appwrite/database';
+import { sendMail } from '../mail/nodemailer';
 
 export default function Dashboard() {
+    // eslint-disable-next-line
     const [books, setBooks] = useState(0)
     const [record, setREcord] = useState(0)
     const [Issued, setIssued] = useState(0);
     const [returnbook, setReturnbook] = useState(0)
 
-    useEffect(() => {
-        listBooks(res => setBooks(res))
-        listRecord(res => setREcord(res))
-        listIssued(res => setIssued(res))
-        listReturned(res => setReturnbook(res))
-        console.log(books);
-    })
+    // useEffect(() => {
+    // listBooks(res => setBooks(res))
+    listRecord(res => setREcord(res))
+    listIssued(res => setIssued(res))
+    listReturned(res => setReturnbook(res))
+    // console.log(books);
+    // })
+    const handl = () => {
+        sendMail("omvakhare150@gmail.com", "hey there test 1");
+    }
     return (
         <>
 
 
             <div>
-                <div className="offcanvas offcanvas-start bg-dark text-white sidebar-nav" tabindex="-1" id="offcanvasExample"
-                    aria-labelledby="offcanvasExampleLabel">
 
-
-                    <div className="offcanvas-body">
-                        <ul className="navbar-nav">
-
-
-                            <li className="nav-item">
-                                <div className="text-secondary small text-uppercase fw-bold"> Core</div>
-                            </li>
-
-                            <li className="nav-item">
-                                <div className="nav-link active" aria-current="page"  >
-                                    <i className="fa-solid fa-table-columns me-2"> </i>Dashboard</div>
-                            </li>
-
-                            <li className="nav-item my-0">
-                                <hr />
-                            </li>
-
-                            <li className="nav-item">
-                                <div className="text-secondary small text-uppercase fw-bold"> Inventory </div>
-                            </li>
-
-                            <li className="nav-item">
-
-                                <div className="nav-link sidebar-link " data-bs-toggle="collapse"  role="button"
-                                    aria-expanded="false" aria-controls="booksMgmt">
-                                    <i className="fa-solid fa-book me-1"></i> Books Management
-                                    <span className="right-icon float-end"> <i className="fa-solid fa-chevron-down "></i></span>
-                                </div>
-
-                                <div className="collapse" id="booksMgmt">
-                                    <div>
-                                        <ul className="navbar-nav ps-3">
-                                            <li>
-                                                <div  className="nav-link ">
-                                                    <i className="fa-solid fa-plus me-2"></i> Add New
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div  className="nav-link ">
-                                                    <i className="fa-solid fa-list me-2"></i> Manage All
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li className="nav-item">
-
-                                <div className="nav-link sidebar-link " data-bs-toggle="collapse" 
-                                    aria-expanded="false" aria-controls="studentMGMT">
-                                    <i className="fa-solid fa-users me-1"></i> Students Management
-                                    <span className="right-icon float-end"> <i className="fa-solid fa-chevron-down "></i></span>
-                                </div>
-
-                                <div className="collapse" id="studentMGMT">
-                                    <div>
-                                        <ul className="navbar-nav ps-3">
-                                            <li>
-                                                <div  className="nav-link ">
-                                                    <i className="fa-solid fa-plus me-2"></i> Add New
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div   className="nav-link ">
-                                                    <i className="fa-solid fa-list me-2"></i> Manage All
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-
-
-
-
-                            <li className="nav-item my-0">
-                                <hr />
-                            </li>
-
-
-                            <li className="nav-item">
-                                <div className="text-secondary small text-uppercase fw-bold"> Action </div>
-                            </li>
-
-
-                            <li className="nav-item">
-                                <div className="nav-link sidebar-link " data-bs-toggle="collapse"  role="button"
-                                    aria-expanded="false" aria-controls="issuedMGMT">
-                                    <i className="fa-solid fa-book-open me-1"></i> Provide Books
-                                    <span className="right-icon float-end"> <i className="fa-solid fa-chevron-down "></i></span>
-                                </div>
-
-                                <div className="collapse" id="issuedMGMT">
-                                    <div>
-                                        <ul className="navbar-nav ps-3">
-                                            <li>
-                                                <div   className="nav-link ">
-                                                    <i className="fa-solid fa-hand-holding-hand me-2"></i>Issue Books
-
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div   className="nav-link ">
-                                                    <i className="fa-solid fa-list-check me-2"></i> Manage Issued Books
-                                                </div>
-                                            </li>
-
-
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="nav-item">
-                                <div className="nav-link sidebar-link " data-bs-toggle="collapse" href="#ReturnMGMT" role="button"
-                                    aria-expanded="false" aria-controls="ReturnMGMT">
-                                    <i className="fa-solid fa-right-left me-2"></i> Return Books
-                                    <span className="right-icon float-end"> <i className="fa-solid fa-chevron-down "></i></span>
-                                </div>
-
-                                <div className="collapse" id="ReturnMGMT">
-                                    <div>
-                                        <ul className="navbar-nav ps-3">
-                                            <li>
-                                                {/* <div   className="nav-link ">
-                                                    <i className="fa-solid fa-square-envelope me-2"></i></i>Notification */}
-
-                                                {/* </div> */}
-                                            </li>
-                                            <li>
-                                                <div   className="nav-link ">
-                                                    <i className="fa-solid fa-arrow-right-arrow-left me-2"></i> Return History
-                                                </div>
-                                            </li>
-
-
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-
-
-                            <li className="nav-item my-0">
-                                <hr />
-                            </li>
-
-                            <li className="nav-item">
-                                {/* <div className="nav-link active" aria-current="page"  >
-                                    <i className="fa-solid fa-right-from-bracket me-2"></i>
-                                    </i>
-                                </div> */}
-                            </li>
-
-                        </ul>
-                    </div>
-
-                </div>
 
 
 
@@ -190,7 +33,7 @@ export default function Dashboard() {
 
                         <div className="row dashboard-counts">
                             <div className="col-md-12">
-                                <h4 className="fw-bold text-uppercase"> Dashboard </h4>
+                                <h4 className="fw-bold text-uppercase" onClick={handl}> Dashboard </h4>
                                 <p>Statistics of the system!</p>
                             </div>
 
@@ -199,9 +42,11 @@ export default function Dashboard() {
                                     <div className="card-body text-center">
                                         <h5 className="card-title text-uppercase text-muted">Total Books</h5>
 
-                                        <h1>{books && books.length}</h1>
+                                        <h1>{books ? books.length : <div class="spinner-grow" role="status">
+                                            <span class="sr-only"></span>
+                                        </div>}</h1>
 
-                                        <div   className="card-link link-underline-light">View More</div>
+                                        <div className="card-link link-underline-light">View More</div>
 
                                     </div>
                                 </div>
@@ -212,9 +57,11 @@ export default function Dashboard() {
                                     <div className="card-body text-center">
                                         <h5 className="card-title text-uppercase text-muted">Total Students</h5>
 
-                                        <h1>{record && record.length}</h1>
+                                        <h1>{record ? record.length : <div class="spinner-grow" role="status">
+                                            <span class="sr-only"></span>
+                                        </div>}</h1>
 
-                                        <div   className="card-link link-underline-light">View More</div>
+                                        <div className="card-link link-underline-light">View More</div>
 
                                     </div>
                                 </div>
@@ -225,9 +72,11 @@ export default function Dashboard() {
                                     <div className="card-body text-center">
                                         <h5 className="card-title text-uppercase text-muted">issued Books</h5>
 
-                                        <h1>{Issued && Issued.length}</h1>
+                                        <h1>{Issued ? Issued.length : <div class="spinner-grow" role="status">
+                                            <span class="sr-only"></span>
+                                        </div>}</h1>
 
-                                        <div   className="card-link link-underline-light">View More</div>
+                                        <div className="card-link link-underline-light">View More</div>
 
                                     </div>
                                 </div>
@@ -237,9 +86,11 @@ export default function Dashboard() {
                                     <div className="card-body text-center">
                                         <h5 className="card-title text-uppercase text-muted">Return Books</h5>
 
-                                        <h1>{returnbook && returnbook.length}</h1>
+                                        <h1>{returnbook ? returnbook.length : <div class="spinner-grow" role="status">
+                                            <span class="sr-only"></span>
+                                        </div>}</h1>
 
-                                        <div   className="card-link link-underline-light">View More</div>
+                                        <div className="card-link link-underline-light">View More</div>
 
                                     </div>
                                 </div>

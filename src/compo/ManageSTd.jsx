@@ -3,15 +3,13 @@ import { deleteRecord, listRecord } from '../appwrite/database'
 
 export default function ManageSTd() {
     const [record, setRecord] = useState([]);
+    const [isRecord, setIsRecord] = useState(false);
     useEffect(() => {
         listRecord((data) => {
-            // Use the data here
             setRecord(data);
-          });
-            
-        // }
-        // setRecord(a);
-    },[])
+            setIsRecord(true);
+        });
+    }, [])
     return (
         <div>
             <main className="mt-1 pt-3">
@@ -43,20 +41,54 @@ export default function ManageSTd() {
                                         </thead>
                                         <tbody>
                                             {
-                                                record.map((item, index) => {
-                                                    console.log();
-                                                    return (<tr key={index}>
-                                                        <th scope="row">{index}</th>
-                                                        <td>{item["student-name"]}</td>
-                                                        <td>{item["enrollment-number"]}</td>
-                                                        <td>{item["email-address"]} </td>
-                                                        <td>{item["phone-number"]}</td>
+                                                isRecord ?
+                                                    record.map((item, index) => {
+                                                        return (<tr key={index}>
+                                                            <th scope="row">{index}</th>
+                                                            <td>{item["student-name"]}</td>
+                                                            <td>{item["enrollment-number"]}</td>
+                                                            <td>{item["email-address"]} </td>
+                                                            <td>{item["phone-number"]}</td>
+                                                            <td>
+                                                                <div className="btn btn-primary btn-sm">Edit </div>
+                                                                <div onClick={() => deleteRecord(item.$id)} className="btn btn-danger btn-sm">Delete </div>
+                                                            </td>
+                                                        </tr>)
+                                                    })
+                                                    :
+                                                    <tr className='m-5' >
                                                         <td>
-                                                            <div  className="btn btn-primary btn-sm">Edit </div>
-                                                            <div   onClick={()=>deleteRecord(item.$id)} className="btn btn-danger btn-sm">Delete </div>
+                                                            <div class="spinner-border  p-3" role="status">
+                                                                <span class="sr-only"></span>
+                                                            </div>
                                                         </td>
-                                                    </tr>)
-                                                })
+                                                        <td>
+                                                            <div class="spinner-border  p-3" role="status">
+                                                                <span class="sr-only"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="spinner-border  p-3" role="status">
+                                                                <span class="sr-only"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="spinner-border  p-3" role="status">
+                                                                <span class="sr-only"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="spinner-border  p-3" role="status">
+                                                                <span class="sr-only"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="spinner-border  p-3" role="status">
+                                                                <span class="sr-only"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
                                             }
 
                                             <tr>

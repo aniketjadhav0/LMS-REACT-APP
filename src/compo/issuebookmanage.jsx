@@ -9,7 +9,9 @@ export default function ManageIssueBook() {
     const [showModal, setShowModal] = useState(false);
     const [mail, setMail] = useState("I trust this message finds you in good spirits. A friendly reminder that the due date for the book you borrowed from our library has passed. Your prompt return would be greatly appreciated, ensuring all members have timely access. If there are any challenges, feel free to reach out.");
     const [userMail, setUserMail] = useState("");
-   
+
+    const [isRecord, setIsRecord] = useState(false);
+
 
     const handleSendMail = () => setShowModal(true);
 
@@ -26,16 +28,18 @@ export default function ManageIssueBook() {
         }
     }
     useEffect(() => {
-        listIssued((res) => setData(res));
+        listIssued((res) => {
+            setData(res);; setIsRecord(true);
+        });
     })
-    const returnBook = (item)=>{
-         
+    const returnBook = (item) => {
+
         returnbook(item["book-name"],
-        item["student-name"],
-        item["issued-date"],
-        item["return-date"],
-         item.$id);
-        
+            item["student-name"],
+            item["issued-date"],
+            item["return-date"],
+            item.$id);
+
     }
     return (
         <div>
@@ -70,8 +74,8 @@ export default function ManageIssueBook() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {
-                                                data && data.map((item, index) => {
+                                            {isRecord ?
+                                                data.map((item, index) => {
                                                     return (
                                                         <tr>
                                                             <th scope="row">{index + 1}</th>
@@ -92,6 +96,45 @@ export default function ManageIssueBook() {
                                                         </tr>
                                                     )
                                                 })
+                                                :
+                                                <tr>
+                                                    <td>
+                                                        <div class="spinner-border  p-3" role="status">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="spinner-border  p-3" role="status">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="spinner-border  p-3" role="status">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="spinner-border  p-3" role="status">
+                                                            <span class="sr-only"> </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="spinner-border  p-3" role="status">
+                                                            <span class="sr-only"> </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="spinner-border  p-3" role="status">
+                                                            <span class="sr-only"> </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="spinner-border  p-3" role="status">
+                                                            <span class="sr-only"> </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
 
                                             }
 

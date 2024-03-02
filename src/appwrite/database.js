@@ -19,7 +19,7 @@ const createBook = (bookName, isbn, authorName, PubName, course, sem ,cb) => {
     )
     .catch((er) => {
       cb(er.message)
-      console.log(er.message);
+      // console.log(er.message);
     });
   // databases.createDocument()
 };
@@ -38,14 +38,14 @@ const returnbook = (bookname, stdname, idate, rdate , id) => {
       }
     )
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       if(res.$id){
         deleteissued(id);
       }
       return res;
     })
     .catch((er) => {
-      console.log(er.message);
+      // console.log(er.message);
       return false;
     });
 };
@@ -101,7 +101,7 @@ const listRecord = (callback) => {
       // return res.documents;
     })
     .catch((er) => {
-      console.log(er.message);
+      // console.log(er.message);
       callback(false);
     });
 };
@@ -118,7 +118,7 @@ const listBooks = (callback) => {
       // return res.documents;
     })
     .catch((er) => {
-      console.log(er.message);
+      // console.log(er.message);
       callback(false);
     });
 };
@@ -131,11 +131,11 @@ const listReturned = (callback)=>{
     .then((res) => {
       callback(res.documents);
       
-      console.log(res);
+      // console.log(res);
       
     })
     .catch((er) => {
-      console.log(er.message);
+      // console.log(er.message);
       callback(false);
     });
 
@@ -153,7 +153,7 @@ const listIssued = (callback) => {
       // return res.documents;
     })
     .catch((er) => {
-      console.log(er.message);
+      // console.log(er.message);
       callback(false);
     });
 };
