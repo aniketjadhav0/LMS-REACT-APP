@@ -18,14 +18,14 @@ const CreateUser = ({email , pass})=>{
      })
     }
 }
-const login = (email,pass)=>{
+const login = (email,pass,cb)=>{
     account.createEmailSession(email,pass)
     .then((res)=>{
+        
         return res;
     })
     .catch((er)=>{
-        console.log(er.message);
-        return false;
+        cb(er.message);
     })
 }
 const logoutf = ()=>{

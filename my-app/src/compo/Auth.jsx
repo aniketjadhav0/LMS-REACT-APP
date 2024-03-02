@@ -1,23 +1,29 @@
+import Cookies from 'js-cookie'
 import React, { useState } from 'react'
 import { login } from '../appwrite/appwrite'
- import { useNavigate } from 'react-router-dom'
+import { Alert } from 'bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 export default function Auth() {
   const [username, setUername] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
+  // 
   const nav = useNavigate();
   const handleLogin = () => {
-    const res = login(username, password)
-    if (res === false) {
-      alert(" login failed")
+    login(username, password, e => setError(e))
+     if (error === "") {
+      Cookies.set('isAuth', 'true', { expires: 7 }); // Expires in 7 days
     } else {
       nav("/dashboard")
-      
-      console.log(res);
     }
-
+    console.log(error);
     // appwrite will handle fom here
   }
-  const [password, setPassword] = useState("")
+  const pushover = ()=>{
+    const b  = new Alert("hey")
+    b.dispose()
+   } 
   return (
     <div className="container d-flex align-items-center justify-content-center vh-100">
       <div className="row">
@@ -36,7 +42,14 @@ export default function Auth() {
                   <h1 className="card-title text-uppercase fw-bold">
                     GP BEED LIBRARY
                   </h1>
-                  <p className="card-text">Enter email and password to login.</p>
+                  <p className="card-text" onDoubleClick={pushover}>Enter email and password to login.</p>
+                  {
+                    error &&
+                    <div class="alert alert-danger" role="alert">
+                      {error}
+                    </div>
+
+                  }
                   <div >
                     <div className="mb-3">
                       <label for="exampleInputEmail1" className="form-label">
