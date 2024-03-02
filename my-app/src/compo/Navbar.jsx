@@ -4,16 +4,20 @@ import { logoutf } from '../appwrite/appwrite';
 import Cookies from 'js-cookie';
 
 export default function Navbar() {
-    const userToken = Cookies.get('userToken');
+    const userToken = Cookies.get('isAuth');
     const loc = useLocation()
     const nav = useNavigate()
     if (userToken !== "true" && loc.pathname !== "/") {
         nav("/");
     }
+    if (userToken === "true" && loc.pathname === "/") {
+        nav("/dashboard");
+    }
     const logout = () => {
         if (userToken === "true") {
             logoutf();
-        }else{
+            Cookies.remove("isAuth")
+        } else {
             alert("login first !");
         }
     }
@@ -27,7 +31,7 @@ export default function Navbar() {
                 </button>
 
 
-                 <div class="navbar-brand fw-bold text-uppercase me-auto" href=" ">GP BEED </div>
+                <div class="navbar-brand fw-bold text-uppercase me-auto" href=" ">GP BEED </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -47,11 +51,11 @@ export default function Navbar() {
 
                     <ul class="navbar-nav  mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                             <div class="nav-link dropdown-toggle"   role="button" data-bs-toggle="dropdown"
+                            <div class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <img src="./assets/images/user.jpg " style={{ width: "3%" }} class="user-icon" alt="" />
                                 Admin
-                             </div>
+                            </div>
                             <ul class="dropdown-menu dropdown-menu-end ">
                                 <li> <div class="dropdown-item"  >My Profile </div></li>
                                 <li> <div class="dropdown-item"  >Change Password </div></li>
@@ -80,7 +84,7 @@ export default function Navbar() {
                         </li>
 
                         <Link to={"/dashboard"} class="nav-item">
-                             <div class="nav-link active" aria-current="page" href="./dashboard.html">
+                            <div class="nav-link active" aria-current="page" href="./dashboard.html">
                                 <i class="fa-solid fa-table-columns me-2"> </i>Dashboard </div>
                         </Link>
 
@@ -97,11 +101,11 @@ export default function Navbar() {
 
                         <li class="nav-item">
 
-                             <div class="nav-link sidebar-link " data-bs-toggle="collapse" href="#booksMgmt" role="button"
+                            <div class="nav-link sidebar-link " data-bs-toggle="collapse" href="#booksMgmt" role="button"
                                 aria-expanded="false" aria-controls="booksMgmt">
                                 <i class="fa-solid fa-book me-1"></i> Books Management
                                 <span class="right-icon float-end"> <i class="fa-solid fa-chevron-down "></i></span>
-                             </div>
+                            </div>
 
                             <div class="collapse" id="booksMgmt">
                                 <div>
@@ -125,11 +129,11 @@ export default function Navbar() {
 
                         <li class="nav-item">
 
-                             <div class="nav-link sidebar-link " data-bs-toggle="collapse" href="#studentMGMT" role="button"
+                            <div class="nav-link sidebar-link " data-bs-toggle="collapse" href="#studentMGMT" role="button"
                                 aria-expanded="false" aria-controls="studentMGMT">
                                 <i class="fa-solid fa-users me-1"></i> Students Management
                                 <span class="right-icon float-end"> <i class="fa-solid fa-chevron-down "></i></span>
-                             </div>
+                            </div>
 
                             <div class="collapse" id="studentMGMT">
                                 <div>
@@ -163,11 +167,11 @@ export default function Navbar() {
 
 
                         <li class="nav-item">
-                             <div class="nav-link sidebar-link " data-bs-toggle="collapse" href="#issuedMGMT" role="button"
+                            <div class="nav-link sidebar-link " data-bs-toggle="collapse" href="#issuedMGMT" role="button"
                                 aria-expanded="false" aria-controls="issuedMGMT">
                                 <i class="fa-solid fa-book-open me-1"></i> Provide Books
                                 <span class="right-icon float-end"> <i class="fa-solid fa-chevron-down "></i></span>
-                             </div>
+                            </div>
 
                             <div class="collapse" id="issuedMGMT">
                                 <div>
@@ -192,21 +196,21 @@ export default function Navbar() {
                         </li>
 
                         <li class="nav-item">
-                             <div class="nav-link sidebar-link " data-bs-toggle="collapse" href="#ReturnMGMT" role="button"
+                            <div class="nav-link sidebar-link " data-bs-toggle="collapse" href="#ReturnMGMT" role="button"
                                 aria-expanded="false" aria-controls="ReturnMGMT">
                                 <i class="fa-solid fa-right-left me-2"></i> Return Books
                                 <span class="right-icon float-end"> <i class="fa-solid fa-chevron-down "></i></span>
-                             </div>
+                            </div>
 
                             <div class="collapse" id="ReturnMGMT">
                                 <div>
                                     <ul class="navbar-nav ps-3">
                                         <li>
-                                             <div   class="nav-link ">
+                                            <div class="nav-link ">
                                                 <i class="fa-solid fa-square-envelope me-2">
                                                 </i>Notification
 
-                                             </div>
+                                            </div>
                                         </li>
                                         <li>
                                             <Link to={"/return-history"} class="nav-link ">
@@ -227,7 +231,7 @@ export default function Navbar() {
                         </li>
 
                         <li class="nav-item" onClick={logout}>
-                             <div class="nav-link active" aria-current="page"  >
+                            <div class="nav-link active" aria-current="page"  >
                                 <i class="fa-solid fa-right-from-bracket me-2"></i> Logout </div>
                         </li>
 

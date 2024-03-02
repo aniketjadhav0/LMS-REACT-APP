@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { Modal, Button } from 'react-bootstrap';
 import { createBook } from '../appwrite/database';
 
 export default function AddBook() {
@@ -10,15 +11,29 @@ export default function AddBook() {
     const [course, setCourse] = useState("df");
     const [sem, setSem] = useState("");
 
+    const [errorString, setString] = useState("");
+    const [error, setError] = useState(false);
 
 
+    const reset = () => {
+        setBookName("")
+        setisbn("")
+        setAuthorName("")
+        setPubName("")
+        setCourse("")
+        setSem("")
+
+    }
     const addBook = () => {
-        const res = createBook(bookName, isbn, authorName, PubName, course, sem)
-        if (res === false) {
-            alert("book add; got failed")
+        if (bookName !== "" && isbn !== "" && PubName !== "" && course !== "" && sem !== "" && authorName !== "") {
+            createBook(bookName, isbn, authorName, PubName, course, sem, (e) => setString(e))
         } else {
-            alert("book add; got success")
+            setString("Please fill all the fields")
+            setError(true);
         }
+        if (errorString === "")
+            setError(true)
+
     }
     return (
         <main className="mt-1 pt-3">
@@ -34,6 +49,20 @@ export default function AddBook() {
                         <div className="card">
                             <div className="card-header">
                                 Fill the form
+                                <Modal show={error} onHide={() => setError(false)}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>{errorString === "" ? "Success" : "Failed"} </Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <p>Your operation was {errorString === "" ? "Successfull." : " Failed !"}</p>
+                                        <p>{errorString}</p>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="primary" onClick={() => setError(false)}>
+                                            Close
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
                             </div>
                             <div className="card-body">
 
@@ -136,7 +165,7 @@ export default function AddBook() {
 
                                         <div className="col-md-12">
                                             <button onClick={addBook} type="submit" className="btn btn-success">Publish</button>
-                                            <button type="reset" className="btn btn-secondary">Cancel</button>
+                                            <button onClick={reset} className="btn btn-secondary">Cancel</button>
                                         </div>
 
                                     </div>

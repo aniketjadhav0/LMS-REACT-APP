@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { issueBook, listBooks, listRecord } from '../appwrite/database';
+import { Modal, Button } from 'react-bootstrap';
+
 
 export default function IssueBook() {
     const [bookName, setBookName] = useState();
@@ -9,6 +11,10 @@ export default function IssueBook() {
 
     const [bookdb, setBookdb] = useState([]);
     const [recordb, setRecordb] = useState();
+
+    const [error, setError] = useState(false);
+    const [errorString, setString] = useState("");
+
     useEffect(() => {
         listBooks(res => { setBookdb(res) })
         listRecord(res => setRecordb(res))
@@ -16,11 +22,44 @@ export default function IssueBook() {
 
 
     })
+
+    const reset = () => {
+        setBookName("")
+        setStdName("")
+        setidate("")
+        setrdate("")
+    }
     const borrow = () => {
-        issueBook(bookName, stdName, idate, rdate)
-           
+        if (bookName === "" || stdName === "" || idate === "" || rdate === "") {
+            setError(true)
+            setString("Please fill all the fields.")
+            return;
+        } else {
+
+            issueBook(bookName, stdName, idate, rdate, (e) => setString(e))
+        }
+        if (idate > rdate) {
+            setError(true)
+            setString("Return date should be greater than issue date.")
+            return;
+        }
+        // if (bookdb.filter(item => item["book-name"] === bookName && item["book-status"] === "Available").length === 0) {
+        //     setError(true)
+        //     setString("Book is not available.")
+        //     return;
+        // }
+        // if (recordb.filter(item => item["book-name"] === bookName && item["student-name"] === stdName).length > 0) {
+        //     setError(true)
+        //     setString("Book is already issued to this student.")
+        //     return;
+        // }
+
+
+        if (errorString === "")
+            setError(true)
 
     }
+
     return (
         <div>
 
@@ -37,6 +76,20 @@ export default function IssueBook() {
                             <div className="card">
                                 <div className="card-header">
                                     Fill the form
+                                    <Modal show={error} onHide={() => setError(false)}>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>{errorString === "" ? "Success" : "Failed"} </Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <p>Your operation was {errorString === "" ? "Successfull." : " Failed !"}</p>
+                                            <p>{errorString}</p>
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button variant="primary" onClick={() => setError(false)}>
+                                                Close
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Modal>
                                 </div>
                                 <div className="card-body">
 
@@ -71,11 +124,11 @@ export default function IssueBook() {
                                                         <option>select student</option>
                                                         {
                                                             recordb && recordb.map(item =>
-                                                                 <option value={item["student-name"]}>
+                                                                <option value={item["student-name"]}>
                                                                     {item["student-name"]}
                                                                 </option>)
                                                         }
-                                                        
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -108,7 +161,7 @@ export default function IssueBook() {
 
                                         <div className="col-md-12">
                                             <button type="submit" onClick={borrow} className="btn btn-success">Submit</button>
-                                            <button type="reset" className="btn btn-secondary">Cancel</button>
+                                            <button type="reset" onClick={reset} className="btn btn-secondary">Cancel</button>
                                         </div>
 
                                     </div>

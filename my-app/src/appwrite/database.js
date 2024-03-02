@@ -1,9 +1,9 @@
 import { ID } from "appwrite";
 import { databases } from "./appwrite";
 
-const createBook = (bookName, isbn, authorName, PubName, course, sem) => {
-  console.log(String(process.env.REACT_APP_DATABASE_ID));
-  databases
+// creation
+const createBook = (bookName, isbn, authorName, PubName, course, sem ,cb) => {
+   databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
       process.env.REACT_APP_BOOK,
@@ -17,13 +17,9 @@ const createBook = (bookName, isbn, authorName, PubName, course, sem) => {
         semester: [sem],
       }
     )
-    .then((res) => {
-      console.log(res);
-      return res;
-    })
     .catch((er) => {
+      cb(er.message)
       console.log(er.message);
-      return false;
     });
   // databases.createDocument()
 };
@@ -53,27 +49,9 @@ const returnbook = (bookname, stdname, idate, rdate , id) => {
       return false;
     });
 };
-const listReturned = (callback)=>{
-  databases
-    .listDocuments(
-      String(process.env.REACT_APP_DATABASE_ID),
-      process.env.REACT_APP_RETURN_SECTION
-    )
-    .then((res) => {
-      callback(res.documents);
-      
-      console.log(res);
-      
-    })
-    .catch((er) => {
-      console.log(er.message);
-      callback(false);
-    });
 
-}
-const issueBook = (bookName, stdName, idate, rdate) => {
-  console.log(String(process.env.REACT_APP_DATABASE_ID));
-  databases
+const issueBook = (bookName, stdName, idate, rdate,cb) => {
+   databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
       process.env.REACT_APP_MANAGE_ISSUED,
@@ -85,17 +63,12 @@ const issueBook = (bookName, stdName, idate, rdate) => {
         "return-date": rdate,
       }
     )
-    .then((res) => {
-      console.log(res);
-      return res;
-    })
     .catch((er) => {
-      console.log(er.message);
-      return false;
+      cb(er.message)
     });
   // databases.createDocument()
 };
-const createRecord = (stdName, enr, email, mob, course, sem) => {
+const createRecord = (stdName, enr, email, mob, course, sem ,cb) => {
   databases
     .createDocument(
       process.env.REACT_APP_DATABASE_ID,
@@ -110,15 +83,13 @@ const createRecord = (stdName, enr, email, mob, course, sem) => {
         semester: sem,
       }
     )
-    .then((res) => {
-      console.log(res);
-      return res;
-    })
+     
     .catch((er) => {
-      console.log(er.message);
-      return false;
+      cb(er.message);
     });
 };
+// listing operation
+
 const listRecord = (callback) => {
   let a;
   a = databases
@@ -151,7 +122,24 @@ const listBooks = (callback) => {
       callback(false);
     });
 };
+const listReturned = (callback)=>{
+  databases
+    .listDocuments(
+      String(process.env.REACT_APP_DATABASE_ID),
+      process.env.REACT_APP_RETURN_SECTION
+    )
+    .then((res) => {
+      callback(res.documents);
+      
+      console.log(res);
+      
+    })
+    .catch((er) => {
+      console.log(er.message);
+      callback(false);
+    });
 
+}
 const listIssued = (callback) => {
   databases
     .listDocuments(
@@ -169,6 +157,9 @@ const listIssued = (callback) => {
       callback(false);
     });
 };
+
+// delete operations
+
 const deleteRecord = (id) => {
   databases.deleteDocument(
     process.env.REACT_APP_DATABASE_ID,
