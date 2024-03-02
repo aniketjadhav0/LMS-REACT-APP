@@ -11,24 +11,24 @@ export default function ManBooks() {
     }, [])
     return (
         <div>
-            <main class="mt-1 pt-3">
-                <div class="container-fluid">
+            <main className="mt-1 pt-3">
+                <div className="container-fluid">
 
 
-                    <div class="row dashboard-counts">
-                        <div class="col-md-12">
-                            <h4 class="fw-bold text-uppercase"> Manage Books </h4>
+                    <div className="row dashboard-counts">
+                        <div className="col-md-12">
+                            <h4 className="fw-bold text-uppercase"> Manage Books </h4>
                         </div>
-                        <div class="col-md-12">
+                        <div className="col-md-12">
 
 
-                            <div class="card">
-                                <div class="card-header">
+                            <div className="card">
+                                <div className="card-header">
                                     All Books
                                 </div>
-                                <div class="card-body">
-                                    <table class="table">
-                                        <thead class="table-dark">
+                                <div className="card-body">
+                                    <table className="table">
+                                        <thead className="table-dark">
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Book Name</th>
@@ -49,8 +49,8 @@ export default function ManBooks() {
                                                         <td>{item["publisher-name"]}</td>
                                                         <td>{item["author-name"]}</td>
                                                         <td>
-                                                            <a href="#" class="btn  btn-primary btn-sm">Edit </a>
-                                                            <a href="#" onClick={() => deleteBook(item.$id)} class="btn btn-danger btn-sm">Delete </a>
+                                                            <div   className="btn  btn-primary btn-sm">Edit </div>
+                                                            <div   onClick={() => deleteBook(item.$id)} className="btn btn-danger btn-sm">Delete </div>
                                                         </td>
                                                     </tr>)
 

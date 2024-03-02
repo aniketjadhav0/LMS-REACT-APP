@@ -11,7 +11,7 @@ export default function AddRecord() {
     const addRecord = () => {
 
         let res = createRecord(stdName, enr, email, mob, course, sem)
-        if (res == false) {
+        if (res === false) {
             alert("Record Added unsuccess")
         } else {
             alert("Record Added Success")
@@ -19,79 +19,79 @@ export default function AddRecord() {
     }
 
 return (
-    <main class="mt-1 pt-3">
-        <div class="container-fluid">
+    <main className="mt-1 pt-3">
+        <div className="container-fluid">
 
 
-            <div class="row dashboard-counts">
-                <div class="col-md-12">
-                    <h4 class="fw-bold text-uppercase"> Add Student </h4>
+            <div className="row dashboard-counts">
+                <div className="col-md-12">
+                    <h4 className="fw-bold text-uppercase"> Add Student </h4>
                 </div>
-                <div class="col-md-12">
+                <div className="col-md-12">
 
 
-                    <div class="card">
-                        <div class="card-header">
+                    <div className="card">
+                        <div className="card-header">
                             Fill the form
                         </div>
-                        <div class="card-body">
+                        <div className="card-body">
 
                             <div>
-                                <div class="row">
+                                <div className="row">
 
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">
-                                                <i class="fa-solid fa-face-smile"></i>
+                                    <div className="col-md-6">
+                                        <div className="mb-3">
+                                            <label for="exampleInputEmail1" className="form-label">
+                                                <i className="fa-solid fa-face-smile"></i>
                                                 Student Name</label>
 
-                                            <input type="text" class="form-control"
+                                            <input type="text" className="form-control"
                                                 value={stdName}
                                                 onChange={(e) => setStdName(e.target.value)} id="exampleInputEmail1"
                                                 aria-describedby="emailHelp" />
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">
-                                                <i class="fa-solid fa-id-card"></i>
+                                    <div className="col-md-6">
+                                        <div className="mb-3">
+                                            <label for="exampleInputPassword1" className="form-label">
+                                                <i className="fa-solid fa-id-card"></i>
                                                 Enrollment Number</label>
 
-                                            <input type="text" class="form-control" id="exampleInputPassword1" value={enr}
+                                            <input type="text" className="form-control" id="exampleInputPassword1" value={enr}
                                                 onChange={(e) => setEnr(e.target.value)} />
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">
-                                                <i class="fa-solid fa-envelope"></i> Email Address
+                                    <div className="col-md-6">
+                                        <div className="mb-3">
+                                            <label for="exampleInputPassword1" className="form-label">
+                                                <i className="fa-solid fa-envelope"></i> Email Address
                                             </label>
 
-                                            <input type="text" class="form-control" id="exampleInputPassword1"
+                                            <input type="text" className="form-control" id="exampleInputPassword1"
                                                 value={email}
                                                 onChange={(e) => setEmail(e.target.value)} />
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">
-                                                <i class="fa-solid fa-phone"></i>
+                                    <div className="col-md-6">
+                                        <div className="mb-3">
+                                            <label for="exampleInputPassword1" className="form-label">
+                                                <i className="fa-solid fa-phone"></i>
                                                 Phone Number</label>
 
-                                            <input type="text" class="form-control" id="exampleInputPassword1"
+                                            <input type="text" className="form-control" id="exampleInputPassword1"
                                                 value={mob}
                                                 onChange={(e) => setMob(e.target.value)} />
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Course</label>
+                                    <div className="col-md-6">
+                                        <div className="mb-3">
+                                            <label for="exampleInputPassword1" className="form-label">Course</label>
 
-                                            <select class="form-control"
+                                            <select className="form-control"
                                                 value={course}
                                                 onChange={(e) => {
                                                     setCourse(e.target.value)
@@ -109,11 +109,11 @@ return (
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Semester</label>
+                                    <div className="col-md-6">
+                                        <div className="mb-3">
+                                            <label for="exampleInputPassword1" className="form-label">Semester</label>
 
-                                            <select class="form-control"
+                                            <select className="form-control"
                                                 value={sem} onChange={(e) => { setSem(e.target.value) }}>
                                                 <option value=""> Select Semester </option>
                                                 <option value="First"> First Semester </option>
@@ -126,9 +126,9 @@ return (
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <button type="submit" onClick={addRecord}  class="btn btn-success">Publish</button>
-                                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                                    <div className="col-md-12">
+                                        <button type="submit" onClick={addRecord}  className="btn btn-success">Publish</button>
+                                        <button type="reset" className="btn btn-secondary">Cancel</button>
                                     </div>
 
 

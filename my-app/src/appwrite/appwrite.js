@@ -7,7 +7,7 @@ client.setProject(process.env.REACT_APP_APPWRITE_END_POINT);
 const account = new Account(client);
 const databases = new Databases(client);
 const CreateUser = ({email , pass})=>{
-    if(email != "" && pass != ""){
+    if(email !== "" && pass !== ""){
 
      const a=   account.create(ID.unique(), email, pass);
      a.catch((e)=>{

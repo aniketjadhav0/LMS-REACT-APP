@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import { login } from '../appwrite/appwrite'
-import { Alert } from 'bootstrap'
-import { useNavigate } from 'react-router-dom'
+ import { useNavigate } from 'react-router-dom'
 
 export default function Auth() {
   const [username, setUername] = useState("")
   const nav = useNavigate();
   const handleLogin = () => {
     const res = login(username, password)
-    if (res == false) {
+    if (res === false) {
       alert(" login failed")
     } else {
       nav("/dashboard")

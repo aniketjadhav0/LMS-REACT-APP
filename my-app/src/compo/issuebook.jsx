@@ -24,31 +24,31 @@ export default function IssueBook() {
     return (
         <div>
 
-            <main class="mt-1 pt-3">
-                <div class="container-fluid">
+            <main className="mt-1 pt-3">
+                <div className="container-fluid">
 
 
-                    <div class="row dashboard-counts">
-                        <div class="col-md-12">
-                            <h4 class="fw-bold text-uppercase"> Issue book </h4>
+                    <div className="row dashboard-counts">
+                        <div className="col-md-12">
+                            <h4 className="fw-bold text-uppercase"> Issue book </h4>
                         </div>
-                        <div class="col-md-12">
+                        <div className="col-md-12">
 
-                            <div class="card">
-                                <div class="card-header">
+                            <div className="card">
+                                <div className="card-header">
                                     Fill the form
                                 </div>
-                                <div class="card-body">
+                                <div className="card-body">
 
                                     <div>
-                                        <div class="row">
+                                        <div className="row">
 
 
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputPassword1" class="form-label">Select Book</label>
+                                            <div className="col-md-6">
+                                                <div className="mb-3">
+                                                    <label for="exampleInputPassword1" className="form-label">Select Book</label>
 
-                                                    <select class="form-control" value={bookName} onChange={(e) => setBookName(e.target.value)}>
+                                                    <select className="form-control" value={bookName} onChange={(e) => setBookName(e.target.value)}>
                                                         <option>select book</option>
                                                         {
                                                             bookdb && bookdb.map(item => <option value={item["book-name"]}>{item["book-name"]}</option>)
@@ -60,11 +60,11 @@ export default function IssueBook() {
 
 
 
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputPassword1" class="form-label">Select Student</label>
+                                            <div className="col-md-6">
+                                                <div className="mb-3">
+                                                    <label for="exampleInputPassword1" className="form-label">Select Student</label>
 
-                                                    <select class="form-control"
+                                                    <select className="form-control"
                                                         value={stdName}
                                                         onChange={(e) => setStdName(e.target.value)}
                                                     >
@@ -80,35 +80,35 @@ export default function IssueBook() {
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-3">
-                                                <div class="mb-3">
-                                                    <label for="exampleInputPassword1" class="form-label" />
+                                            <div className="col-md-3">
+                                                <div className="mb-3">
+                                                    <label for="exampleInputPassword1" className="form-label" />
                                                     {/* <!-- icon-->  */}
-                                                    <i class="fa-solid fa-id-card" />
+                                                    <i className="fa-solid fa-id-card" />
                                                     <p>
 
                                                         Issue Date
                                                     </p>
                                                 </div>
 
-                                                <input type="date" class="form-control" id="exampleInputPassword1" value={idate} onChange={(e) => setidate(e.target.value)} />
+                                                <input type="date" className="form-control" id="exampleInputPassword1" value={idate} onChange={(e) => setidate(e.target.value)} />
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="exampleInputPassword1" class="form-label">
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
+                                                <label for="exampleInputPassword1" className="form-label">
                                                     {/* <!-- icon--> */}
-                                                    <i class="fa-solid fa-id-card"></i>
+                                                    <i className="fa-solid fa-id-card"></i>
                                                     Return Date</label>
 
-                                                <input type="date" class="form-control" id="exampleInputPassword1" value={rdate} onChange={(e) => setrdate(e.target.value)} />
+                                                <input type="date" className="form-control" id="exampleInputPassword1" value={rdate} onChange={(e) => setrdate(e.target.value)} />
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12">
-                                            <button type="submit" onClick={borrow} class="btn btn-success">Submit</button>
-                                            <button type="reset" class="btn btn-secondary">Cancel</button>
+                                        <div className="col-md-12">
+                                            <button type="submit" onClick={borrow} className="btn btn-success">Submit</button>
+                                            <button type="reset" className="btn btn-secondary">Cancel</button>
                                         </div>
 
                                     </div>

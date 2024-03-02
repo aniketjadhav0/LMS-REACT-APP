@@ -3,108 +3,108 @@ import { useState } from 'react'
 import { createBook } from '../appwrite/database';
 
 export default function AddBook() {
-    const [bookName , setBookName] = useState("");
-    const [isbn , setisbn] = useState("");
-    const [authorName , setAuthorName] = useState("");
+    const [bookName, setBookName] = useState("");
+    const [isbn, setisbn] = useState("");
+    const [authorName, setAuthorName] = useState("");
     const [PubName, setPubName] = useState("");
-    const [course , setCourse] = useState("df");
-    const [sem , setSem] = useState("");
+    const [course, setCourse] = useState("df");
+    const [sem, setSem] = useState("");
 
-    
 
-    const addBook = ()=>{
-       const res =  createBook(bookName,isbn,authorName,PubName,course,sem)
-        if (res == false) {
+
+    const addBook = () => {
+        const res = createBook(bookName, isbn, authorName, PubName, course, sem)
+        if (res === false) {
             alert("book add; got failed")
-        }else{
+        } else {
             alert("book add; got success")
         }
     }
     return (
-        <main class="mt-1 pt-3">
-            <div class="container-fluid">
+        <main className="mt-1 pt-3">
+            <div className="container-fluid">
 
 
-                <div class="row dashboard-counts">
-                    <div class="col-md-12">
-                        <h4 class="fw-bold text-uppercase"> Add Book </h4>
+                <div className="row dashboard-counts">
+                    <div className="col-md-12">
+                        <h4 className="fw-bold text-uppercase"> Add Book </h4>
                     </div>
 
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
+                    <div className="col-md-12">
+                        <div className="card">
+                            <div className="card-header">
                                 Fill the form
                             </div>
-                            <div class="card-body">
+                            <div className="card-body">
 
                                 <div>
-                                    <div class="row">
+                                    <div className="row">
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
                                                 <label for="exampleInputEmail1"
-                                                    class="form-label">Book Name</label>
+                                                    className="form-label">Book Name</label>
 
                                                 <input type="text"
-                                                    class="form-control"
+                                                    className="form-control"
                                                     value={bookName}
-                                                    onChange={(e)=>setBookName(e.target.value)}
+                                                    onChange={(e) => setBookName(e.target.value)}
                                                     id="exampleInputEmail1"
                                                     aria-describedby="emailHelp" />
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
                                                 <label for="exampleInputPassword1"
-                                                    class="form-label">ISBN Number</label>
+                                                    className="form-label">ISBN Number</label>
 
                                                 <input type="text"
-                                                    class="form-control"
+                                                    className="form-control"
                                                     value={isbn}
-                                                    onChange={(e)=>setisbn(e.target.value)}
+                                                    onChange={(e) => setisbn(e.target.value)}
                                                     id="exampleInputPassword1" />
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
                                                 <label for="exampleInputPassword1"
-                                                    class="form-label">Author Name</label>
+                                                    className="form-label">Author Name</label>
 
                                                 <input type="text"
-                                                    class="form-control"
+                                                    className="form-control"
                                                     value={authorName}
-                                                    onChange={(e)=>setAuthorName(e.target.value)}
+                                                    onChange={(e) => setAuthorName(e.target.value)}
                                                     id="exampleInputPassword1" />
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
                                                 <label for="exampleInputPassword1"
-                                                    class="form-label">Publisher Name</label>
+                                                    className="form-label">Publisher Name</label>
 
                                                 <input type="text"
-                                                    class="form-control"
+                                                    className="form-control"
                                                     value={PubName}
-                                                    onChange={(e)=>setPubName(e.target.value)}
+                                                    onChange={(e) => setPubName(e.target.value)}
                                                     id="exampleInputPassword1" />
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
                                                 <label for="exampleInputPassword1"
-                                                    class="form-label">Course</label>
+                                                    className="form-label">Course</label>
 
-                                                <select class="form-control" 
-                                                value={course}
-                                                 onChange={(e)=>{
-                                                    setCourse(e.target.value)
-                                                    console.log(e.target);
+                                                <select className="form-control"
+                                                    value={course}
+                                                    onChange={(e) => {
+                                                        setCourse(e.target.value)
+                                                        console.log(e.target);
                                                     }}
-                                                    >
+                                                >
                                                     <option value=""> Please select </option>
                                                     <option value="Computer Engineering"> Computer Engineering </option>
                                                     <option value="Civil Engineering"> Civil Engineering</option>
@@ -116,13 +116,13 @@ export default function AddBook() {
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
                                                 <label for="exampleInputPassword1"
-                                                    class="form-label">Semester</label>
+                                                    className="form-label">Semester</label>
 
-                                                <select class="form-control"
-                                                value={sem} onChange={(e)=>{setSem(e.target.value)}}>
+                                                <select className="form-control"
+                                                    value={sem} onChange={(e) => { setSem(e.target.value) }}>
                                                     <option value=""> Select Semester </option>
                                                     <option value="First"> First Semester </option>
                                                     <option value="Second"> Second Semester</option>
@@ -134,9 +134,9 @@ export default function AddBook() {
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12">
-                                            <button onClick={addBook} type="submit" class="btn btn-success">Publish</button>
-                                            <button type="reset" class="btn btn-secondary">Cancel</button>
+                                        <div className="col-md-12">
+                                            <button onClick={addBook} type="submit" className="btn btn-success">Publish</button>
+                                            <button type="reset" className="btn btn-secondary">Cancel</button>
                                         </div>
 
                                     </div>
