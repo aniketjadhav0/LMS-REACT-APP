@@ -1,11 +1,17 @@
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { logoutf } from '../appwrite/appwrite';
+import { databases, logoutf } from '../appwrite/appwrite';
 import Cookies from 'js-cookie';
+import { Query } from 'appwrite';
+import { Button, Modal, Table } from 'react-bootstrap';
 
 export default function Navbar() {
     const userToken = Cookies.get('isAuth');
     const loc = useLocation()
+    const [search, setSearch] = React.useState("")
+    const [data, setData] = React.useState()
+    const [show, setshow] = React.useState(false)
+
     const nav = useNavigate()
     if (userToken !== "true" && loc.pathname !== "/") {
         nav("/");
@@ -19,6 +25,23 @@ export default function Navbar() {
             Cookies.remove("isAuth")
         } else {
             alert("login first !");
+        }
+    }
+    const searchdb = () => {
+        if (search.length > 0) {
+            const data = databases.listDocuments(process.env.REACT_APP_DATABASE_ID, process.env.REACT_APP_BOOK,
+                [Query.search("book-name", search)]
+            )
+            data.catch(e => {
+                alert(e.message)
+            })
+            data.then((res) => {
+                setshow(true)
+                
+                setData(res.documents)
+            })
+        } else {
+            alert("enter something to search")
         }
     }
     return (
@@ -43,9 +66,17 @@ export default function Navbar() {
                     <form class="d-flex ms-auto " role="search">
                         <div class="input-group my-3 my-lg-0 ">
                             <input type="text" class="form-control" placeholder="Search..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
                                 aria-label="Recipient's username" aria-describedby="button-addon2" />
+
                             <button class="btn btn-outline-secondary btn-primary text-white " type="button"
-                                id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                id="button-addon2"
+                                onClick={searchdb}>
+                                <i class="fa-solid fa-magnifying-glass"></i></button>
+                            <SearchResultModal show={show}
+                                onHide={() => setshow(false)}
+                                searchData={data} />
                         </div>
                     </form>
 
@@ -242,3 +273,44 @@ export default function Navbar() {
         </nav>
     )
 }
+
+
+
+const SearchResultModal = ({ show, onHide, searchData }) => {
+    return (
+        <Modal show={show} onHide={onHide}>
+            <Modal.Header closeButton>
+                <Modal.Title>Search Results</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Book Name</th>
+                                {/* Add more table headers based on your data */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {searchData ? searchData.map((result, index) => (
+                                <tr key={index}>
+                                    <td>{result['book-name']}</td>
+                                    {/* Add more table cells based on your data */}
+                                </tr>
+                            )):
+                                <tr>
+                                    <td>No Data Found</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </Table>
+                
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={onHide}>
+                    Close
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    );
+};
