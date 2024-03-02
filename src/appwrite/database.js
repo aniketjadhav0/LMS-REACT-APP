@@ -118,7 +118,7 @@ const listBooks = (callback) => {
       // return res.documents;
     })
     .catch((er) => {
-      // console.log(er.message);
+      console.log(er.message);
       callback(false);
     });
 };

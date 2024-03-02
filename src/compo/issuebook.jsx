@@ -16,7 +16,7 @@ export default function IssueBook() {
     const [errorString, setString] = useState("");
 
     useEffect(() => {
-        listBooks(res => { setBookdb(res) })
+        listBooks(res => { setBookdb(res.documents) })
         listRecord(res => setRecordb(res))
         console.log(bookdb, recordb);
 
@@ -38,11 +38,7 @@ export default function IssueBook() {
 
             issueBook(bookName, stdName, idate, rdate, (e) => setString(e))
         }
-        if (idate > rdate) {
-            setError(true)
-            setString("Return date should be greater than issue date.")
-            return;
-        }
+       
         // if (bookdb.filter(item => item["book-name"] === bookName && item["book-status"] === "Available").length === 0) {
         //     setError(true)
         //     setString("Book is not available.")
@@ -56,7 +52,9 @@ export default function IssueBook() {
 
 
         if (errorString === "")
-            setError(true)
+            setString("Book is issued successfully.")
+        setError(true)
+        reset()
 
     }
 

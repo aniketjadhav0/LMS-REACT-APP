@@ -1,5 +1,5 @@
-import React, {  useState } from 'react'
-import {  listIssued, listRecord, listReturned } from '../appwrite/database';
+import React, { useState } from 'react'
+import { listBooks, listIssued, listRecord, listReturned } from '../appwrite/database';
 import { sendMail } from '../mail/nodemailer';
 
 export default function Dashboard() {
@@ -10,14 +10,15 @@ export default function Dashboard() {
     const [returnbook, setReturnbook] = useState(0)
 
     // useEffect(() => {
-    // listBooks(res => setBooks(res))
+    listBooks(res => setBooks(res.documents))
     listRecord(res => setREcord(res))
     listIssued(res => setIssued(res))
     listReturned(res => setReturnbook(res))
-    // console.log(books);
+    //  console.log(books);
     // })
     const handl = () => {
         sendMail("omvakhare150@gmail.com", "hey there test 1");
+
     }
     return (
         <>

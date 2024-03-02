@@ -35,7 +35,7 @@ const sendMail = (to, text) => {
       process.env.REACT_APP_MAIL_FUN_ID,
       JSON.stringify({ TO: to, TEXT: text }),
       false,
-      "/",
+      "/send-email",
       "POST",
       { "X-Custom-Header": "123" }
     )
