@@ -32,7 +32,7 @@ export default function ManageIssueBook() {
     const returnBook = (item) => {
         returnbook(item["book-name"],
             item["student-name"],
-            item["issued-date"],
+            item["Issued-date"],
             item["return-date"],
             item.$id );
     }

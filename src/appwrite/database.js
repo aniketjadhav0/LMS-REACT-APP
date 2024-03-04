@@ -33,7 +33,7 @@ const returnbook = (bookname, stdname, idate, rdate ,id) => {
       {
         "book-name": bookname,
         "student-name": stdname,
-        "Issued-date": idate,
+        "issued-date": idate,
         "return-date": rdate,
       }
     )
