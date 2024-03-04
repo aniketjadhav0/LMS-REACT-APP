@@ -14,15 +14,11 @@ export default function ManageSTd() {
         <div>
             <main className="mt-1 pt-3">
                 <div className="container-fluid">
-
-
                     <div className="row dashboard-counts">
                         <div className="col-md-12">
                             <h4 className="fw-bold text-uppercase"> Manage Students</h4>
                         </div>
                         <div className="col-md-12">
-
-
                             <div className="card">
                                 <div className="card-header">
                                     All Students
@@ -91,9 +87,7 @@ export default function ManageSTd() {
 
                                             }
 
-                                            <tr>
-
-                                            </tr>
+                                             
                                         </tbody>
                                     </table>
                                 </div>

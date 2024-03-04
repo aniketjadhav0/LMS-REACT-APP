@@ -24,7 +24,7 @@ const createBook = (bookName, isbn, authorName, PubName, course, sem, cb) => {
   // databases.createDocument()
 };
 
-const returnbook = (bookname, stdname, idate, rdate, id) => {
+const returnbook = (bookname, stdname, idate, rdate ,id) => {
   databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
@@ -33,20 +33,18 @@ const returnbook = (bookname, stdname, idate, rdate, id) => {
       {
         "book-name": bookname,
         "student-name": stdname,
-        "issued-date": idate,
+        "Issued-date": idate,
         "return-date": rdate,
       }
     )
     .then((res) => {
-      // console.log(res);
+      console.log(res);
       if (res.$id) {
         deleteissued(id);
       }
-      return res;
     })
     .catch((er) => {
-      // console.log(er.message);
-      return false;
+      console.log(er.message);
     });
 };
 
@@ -159,36 +157,56 @@ const listIssued = (callback) => {
 // delete operations
 
 const deleteRecord = (id) => {
-  databases.deleteDocument(
-    process.env.REACT_APP_DATABASE_ID,
-    process.env.REACT_APP_STD,
-    id
-  );
-  window.location.reload();
+  databases
+    .deleteDocument(
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_STD,
+      id
+    )
+    .then((e) => {
+      if (e.message === "") {
+        window.location.reload();
+      }
+    })
+    .catch((er) => {
+      console.log(er);
+    });
 };
 const deleteBook = (id) => {
-  databases.deleteDocument(
-    process.env.REACT_APP_DATABASE_ID,
-    process.env.REACT_APP_BOOK,
-    id
-  );
-  window.location.reload();
+  databases
+    .deleteDocument(
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_BOOK,
+      id
+    )
+    .then(() => {
+      window.location.reload();
+    })
+    .catch((er) => {
+      console.log(er);
+    });
 };
 const deleteissued = (id) => {
-  databases.deleteDocument(
-    process.env.REACT_APP_DATABASE_ID,
-    process.env.REACT_APP_MANAGE_ISSUED,
-    id
-  );
-  window.location.reload();
+  databases
+    .deleteDocument(
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_MANAGE_ISSUED,
+      id
+    )
+    .then(() => {
+      window.location.reload();
+    });
 };
 const delRet = (id) => {
-  databases.deleteDocument(
-    process.env.REACT_APP_DATABASE_ID,
-    process.env.REACT_APP_RETURN_SECTION,
-    id
-  );
-  window.location.reload();
+  databases
+    .deleteDocument(
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_RETURN_SECTION,
+      id
+    )
+    .then(() => {
+      window.location.reload();
+    });
 };
 
 export {

@@ -8,7 +8,7 @@ export default function ManBooks() {
         listBooks(res => {
             setBooks(res.documents);
         })
-    }, [])
+    }, [ ])
     return (
         <div>
             <main className="mt-1 pt-3">

@@ -30,13 +30,11 @@ export default function ManageIssueBook() {
         });
     })
     const returnBook = (item) => {
-
         returnbook(item["book-name"],
             item["student-name"],
             item["issued-date"],
             item["return-date"],
-            item.$id);
-
+            item.$id );
     }
     return (
         <div>
@@ -71,7 +69,7 @@ export default function ManageIssueBook() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {isRecord ?
+                                            {(isRecord && data )?
                                                 data.map((item, index) => {
                                                     return (
                                                         <tr>
