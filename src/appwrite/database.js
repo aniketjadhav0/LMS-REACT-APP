@@ -237,6 +237,20 @@ const updateRecord = (id, stdName, enr, email, mob) => {
   ).catch(e=>alert(e.message))
 
 }
+const updateIssued = (id, bookName, stdName, idate, rdate) => {
+  databases.updateDocument(
+    process.env.REACT_APP_DATABASE_ID,
+    process.env.REACT_APP_MANAGE_ISSUED,
+    id,
+    {
+      "book-name": bookName,
+      "student-name": stdName,
+      "Issued-date": idate,
+      "return-date": rdate,
+    }
+  ).catch(e=>alert(e.message))
+
+}
 export {
   createBook,
   createRecord,
@@ -251,5 +265,6 @@ export {
   deleteBook,
   deleteissued,
   updateBook,
-  updateRecord
+  updateRecord,
+  updateIssued
 };
