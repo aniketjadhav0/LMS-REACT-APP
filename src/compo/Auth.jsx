@@ -17,16 +17,14 @@ export default function Auth() {
     login(username, password, e => setError(e))
     if (error === "") {
       alert("Click on login again")
-      return;
+
     }
-    if (error !== "") {
-      toast.info(error)
-      toast.error('Login failed. Please check your credentials.');
-    } else {
+    if (error === "success") {
       toast('Login successful!');
       Cookies.set('isAuth', 'true', { expires: 7 }); // Expires in 7 days
       nav("/dashboard")
     }
+     
   }
   const pushover = () => {
     toast('Login successful!');
