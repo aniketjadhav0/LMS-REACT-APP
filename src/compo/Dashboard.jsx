@@ -14,7 +14,7 @@ export default function Dashboard() {
         listIssued(res => setIssued(res))
         listReturned(res => setReturnbook(res))
         //  console.log(books);
-    })
+    },[])
 
     return (
         <>
