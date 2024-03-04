@@ -22,7 +22,7 @@ export default function Navbar() {
     const logout = () => {
         if (userToken === "true") {
             logoutf();
-            Cookies.remove("isAuth")
+            Cookies.remove("isAuth");
         } else {
             alert("login first !");
         }

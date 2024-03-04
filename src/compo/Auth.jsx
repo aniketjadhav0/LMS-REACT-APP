@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import { login } from '../appwrite/appwrite'
 import { Alert } from 'bootstrap'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Auth() {
   const [username, setUername] = useState("")
@@ -10,20 +13,26 @@ export default function Auth() {
   const [error, setError] = useState("")
   // 
   const nav = useNavigate();
-  const handleLogin = () => {
+  const handleLogin = (e) => {
     login(username, password, e => setError(e))
-     if (error === "") {
-      Cookies.set('isAuth', 'true', { expires: 7 }); // Expires in 7 days
+    if (error === "") {
+      alert("Click on login again")
+      return;
+    }
+    if (error !== "") {
+      toast.info(error)
+      toast.error('Login failed. Please check your credentials.');
     } else {
+      toast('Login successful!');
+      Cookies.set('isAuth', 'true', { expires: 7 }); // Expires in 7 days
       nav("/dashboard")
     }
-    console.log(error);
-    // appwrite will handle fom here
   }
-  const pushover = ()=>{
-    const b  = new Alert("hey")
+  const pushover = () => {
+    toast('Login successful!');
+    const b = new Alert("hey")
     b.dispose()
-   } 
+  }
   return (
     <div className="container d-flex align-items-center justify-content-center vh-100">
       <div className="row">
@@ -77,7 +86,7 @@ export default function Auth() {
                         />
                       </div>
 
-                      <button type="submit" onClick={handleLogin} className="btn btn-primary">
+                      <button type="submit" onClick={(e) => handleLogin(e.target)} className="btn btn-primary">
                         Login
                       </button>
                     </div>

@@ -22,15 +22,20 @@ const CreateUser = ({ email, pass }) => {
 const login = (email, pass, cb) => {
   account
     .createEmailSession(email, pass)
-    .then((res) => {
-      return res;
-    })
+     .then(()=>{
+      cb("success");
+     })
     .catch((er) => {
       cb(er.message);
+      return false;
     });
 };
 const logoutf = () => {
-  account.deleteSession("current");
-  window.location.reload();
+  account.deleteSession("current").then((e)=>{
+    alert("Logged out successfully");
+    window.location.reload();
+  }).catch((e)=>{
+    alert( e.message);
+  })
 };
 export { CreateUser, databases, logoutf, func, login };
