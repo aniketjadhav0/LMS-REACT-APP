@@ -208,18 +208,48 @@ const delRet = (id) => {
       window.location.reload();
     });
 };
+// edit or update operations
+const updateBook = (id, bookName, isbn, authorName, PubName) => {
+  databases.updateDocument(
+    process.env.REACT_APP_DATABASE_ID,
+    process.env.REACT_APP_BOOK,
+    id,
+    {
+      "book-name": bookName,
+      "ISBN-number": isbn,
+      "author-name": authorName,
+      "publisher-name": PubName
+    }
+  ).catch(e=>alert(e.message))
 
+}
+const updateRecord = (id, stdName, enr, email, mob) => {
+  databases.updateDocument(
+    process.env.REACT_APP_DATABASE_ID,
+    process.env.REACT_APP_STD,
+    id,
+    {
+      "student-name": stdName,
+      "enrollment-number": enr,
+      "email-address": email,
+      "phone-number": mob,
+    }
+  ).catch(e=>alert(e.message))
+
+}
 export {
   createBook,
   createRecord,
-  listBooks,
-  returnbook,
-  listIssued,
-  deleteRecord,
   issueBook,
+  returnbook,
+  listBooks,
+  listIssued,
+  listReturned,
+  listRecord,
+  deleteRecord,
   delRet,
   deleteBook,
-  listReturned,
   deleteissued,
-  listRecord,
+  updateBook,
+  updateRecord
 };
