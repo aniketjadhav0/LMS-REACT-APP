@@ -103,6 +103,7 @@ export default function ManageIssueBook() {
                                                 <th scope="col">Student Name</th>
                                                 <th scope="col">Issued Date</th>
                                                 <th scope="col">Return Date</th>
+                                                <th scope="col">Email</th>
                                                 <th scope="col">Action </th>
                                                 <th scope="col">Send Mail</th>
                                                 <th scope="col">Return Section</th>
@@ -158,6 +159,12 @@ export default function ManageIssueBook() {
                                                             )}
                                                         </td>
                                                         <td>
+                                                            {
+                                                            
+                                                                item["emailAddress"]
+                                                            }
+                                                        </td>
+                                                        <td>
                                                             {editableRecord === index ? (
                                                                 <>
                                                                     <div className="btn btn-success btn-sm" onClick={() => updateRecordData(index)}>Save</div>
@@ -171,7 +178,7 @@ export default function ManageIssueBook() {
                                                             )}
                                                         </td>
                                                         <td>
-                                                            <button className="btn btn-success btn-sm" onClick={() => { setUserMail(item.studentEmail); handleSendMail() }}>Send Mail</button>
+                                                            <button className="btn btn-success btn-sm" onClick={() => { setUserMail(item.emailAddress); handleSendMail() }}>Send Mail</button>
                                                         </td>
                                                         <td>
                                                             <button className="btn btn-danger btn-sm" onClick={() => { returnBook(item) }}>Return Book</button>

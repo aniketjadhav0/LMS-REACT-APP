@@ -8,6 +8,7 @@ export default function IssueBook() {
     const [stdName, setStdName] = useState();
     const [idate, setidate] = useState();
     const [rdate, setrdate] = useState()
+    const [email, setEmail] = useState("")
 
     const [bookdb, setBookdb] = useState([]);
     const [recordb, setRecordb] = useState();
@@ -28,6 +29,7 @@ export default function IssueBook() {
         setStdName("")
         setidate("")
         setrdate("")
+        setEmail("")
     }
     const borrow = () => {
         if (bookName === "" || stdName === "" || idate === "" || rdate === "") {
@@ -35,21 +37,8 @@ export default function IssueBook() {
             setString("Please fill all the fields.")
             return;
         } else {
-
-            issueBook(bookName, stdName, idate, rdate, (e) => setString(e))
+            issueBook(bookName, stdName, idate, rdate, email, (e) => setString(e))
         }
-       
-        // if (bookdb.filter(item => item["book-name"] === bookName && item["book-status"] === "Available").length === 0) {
-        //     setError(true)
-        //     setString("Book is not available.")
-        //     return;
-        // }
-        // if (recordb.filter(item => item["book-name"] === bookName && item["student-name"] === stdName).length > 0) {
-        //     setError(true)
-        //     setString("Book is already issued to this student.")
-        //     return;
-        // }
-
 
         if (errorString === "")
             setString("Book is issued successfully.")
@@ -131,22 +120,34 @@ export default function IssueBook() {
                                                 </div>
                                             </div>
 
-                                            <div className="col-md-3">
-                                                <div className="mb-3">
-                                                    <label for="exampleInputPassword1" className="form-label" />
-                                                    {/* <!-- icon-->  */}
-                                                    <i className="fa-solid fa-id-card" />
-                                                    <p>
-
-                                                        Issue Date
-                                                    </p>
-                                                </div>
-
-                                                <input type="date" className="form-control" id="exampleInputPassword1" value={idate} onChange={(e) => setidate(e.target.value)} />
-                                            </div>
                                         </div>
 
                                         <div className="col-md-6">
+                                            <div className="mb-2">
+                                                <label for="exampleInputPassword1" className="form-label">Email</label>
+
+                                                <input
+                                                    type='text'
+                                                    className="form-control"
+                                                    placeholder='email@gmail.com'
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                >
+                                                </input>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
+                                                <label for="exampleInputPassword1" className="form-label" />
+                                                {/* <!-- icon-->  */}
+                                                <p>
+                                                    <i className="fa-solid fa-id-card" />
+
+                                                    Issue Date
+                                                </p>
+                                                <input type="date" className="form-control" id="exampleInputPassword1" value={idate} onChange={(e) => setidate(e.target.value)} />
+                                            </div>
+
                                             <div className="mb-3">
                                                 <label for="exampleInputPassword1" className="form-label">
                                                     {/* <!-- icon--> */}

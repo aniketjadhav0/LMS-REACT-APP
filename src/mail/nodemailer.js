@@ -1,6 +1,7 @@
 import { func } from "../appwrite/appwrite";
 
 const sendMail = (to, text) => {
+  console.log(to , text);
   func
     .createExecution(
       process.env.REACT_APP_MAIL_FUN_ID,

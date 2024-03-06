@@ -48,7 +48,7 @@ const returnbook = (bookname, stdname, idate, rdate ,id) => {
     });
 };
 
-const issueBook = (bookName, stdName, idate, rdate, cb) => {
+const issueBook = (bookName, stdName, idate, rdate , email, cb) => {
   databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
@@ -59,6 +59,7 @@ const issueBook = (bookName, stdName, idate, rdate, cb) => {
         "student-name": stdName,
         "Issued-date": idate,
         "return-date": rdate,
+        "emailAddress": email,
       }
     )
     .catch((er) => {
