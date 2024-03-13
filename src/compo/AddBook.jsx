@@ -56,7 +56,7 @@ export default function AddBook() {
                                         <Modal.Title>{errorString } </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <p>Your operation was completed !</p>
+                                        <p>Your operation is done !</p>
                                         <p>{errorString}</p>
                                     </Modal.Body>
                                     <Modal.Footer>
