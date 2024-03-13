@@ -1,4 +1,4 @@
-import { ID } from "appwrite";
+import { ID, Query } from "appwrite";
 import { databases } from "./appwrite";
 
 // creation
@@ -24,7 +24,7 @@ const createBook = (bookName, isbn, authorName, PubName, course, bNum, cb) => {
   // databases.createDocument()
 };
 
-const returnbook = (bookname, stdname, idate, rdate ,id) => {
+const returnbook = (bookname, stdname, idate, rdate, id) => {
   databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
@@ -48,7 +48,7 @@ const returnbook = (bookname, stdname, idate, rdate ,id) => {
     });
 };
 
-const issueBook = (bookName, stdName, idate, rdate , email, cb) => {
+const issueBook = (bookName, stdName, idate, rdate, email, cb) => {
   databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
@@ -59,7 +59,7 @@ const issueBook = (bookName, stdName, idate, rdate , email, cb) => {
         "student-name": stdName,
         "Issued-date": idate,
         "return-date": rdate,
-        "emailAddress": email,
+        emailAddress: email,
       }
     )
     .catch((er) => {
@@ -69,29 +69,43 @@ const issueBook = (bookName, stdName, idate, rdate , email, cb) => {
 };
 const createRecord = (stdName, enr, email, mob, course, sem, cb) => {
   let isUnque = false;
-  
-  if (isUnque) {
-    
-    databases
-    .createDocument(
+  // checking if the enrollment already exists or not
+  databases
+    .listDocuments(
       process.env.REACT_APP_DATABASE_ID,
       process.env.REACT_APP_STD,
-      ID.unique(),
-      {
-        "student-name": stdName,
-        "enrollment-number": enr,
-        "email-address": email,
-        "phone-number": mob,
-        course: course,
-        semester: sem,
-      }
+      [Query.equal("enr", enr)]
     )
-
+    .then((res) => {
+      console.log(res);
+      if (res.documents.length === 0) {
+        isUnque = true;
+      } else {
+        isUnque = false;
+      }
+    })
     .catch((er) => {
-      cb(er.message);
+      isUnque = false;
     });
+  if (isUnque) {
+    databases
+      .createDocument(
+        process.env.REACT_APP_DATABASE_ID,
+        process.env.REACT_APP_STD,
+        ID.unique(),
+        {
+          "student-name": stdName,
+          "enrollment-number": enr,
+          "email-address": email,
+          "phone-number": mob,
+          course: course,
+          semester: sem,
+        }
+      )
+      .catch((er) => {
+        cb(er.message);
+      });
   }
-
 };
 // listing operation
 
@@ -216,49 +230,52 @@ const delRet = (id) => {
     });
 };
 // edit or update operations
-const updateBook = (id, bookName, isbn, authorName, PubName,bNum) => {
-  databases.updateDocument(
-    process.env.REACT_APP_DATABASE_ID,
-    process.env.REACT_APP_BOOK,
-    id,
-    {
-      "book-name": bookName,
-      "ISBN-number": isbn,
-      "author-name": authorName,
-      "publisher-name": PubName,
-      "book-number": bNum
-    }
-  ).catch(e=>alert(e.message))
-
-}
+const updateBook = (id, bookName, isbn, authorName, PubName, bNum) => {
+  databases
+    .updateDocument(
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_BOOK,
+      id,
+      {
+        "book-name": bookName,
+        "ISBN-number": isbn,
+        "author-name": authorName,
+        "publisher-name": PubName,
+        "book-number": bNum,
+      }
+    )
+    .catch((e) => alert(e.message));
+};
 const updateRecord = (id, stdName, enr, email, mob) => {
-  databases.updateDocument(
-    process.env.REACT_APP_DATABASE_ID,
-    process.env.REACT_APP_STD,
-    id,
-    {
-      "student-name": stdName,
-      "enrollment-number": enr,
-      "email-address": email,
-      "phone-number": mob,
-    }
-  ).catch(e=>alert(e.message))
-
-}
+  databases
+    .updateDocument(
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_STD,
+      id,
+      {
+        "student-name": stdName,
+        "enrollment-number": enr,
+        "email-address": email,
+        "phone-number": mob,
+      }
+    )
+    .catch((e) => alert(e.message));
+};
 const updateIssued = (id, bookName, stdName, idate, rdate) => {
-  databases.updateDocument(
-    process.env.REACT_APP_DATABASE_ID,
-    process.env.REACT_APP_MANAGE_ISSUED,
-    id,
-    {
-      "book-name": bookName,
-      "student-name": stdName,
-      "Issued-date": idate,
-      "return-date": rdate,
-    }
-  ).catch(e=>alert(e.message))
-
-}
+  databases
+    .updateDocument(
+      process.env.REACT_APP_DATABASE_ID,
+      process.env.REACT_APP_MANAGE_ISSUED,
+      id,
+      {
+        "book-name": bookName,
+        "student-name": stdName,
+        "Issued-date": idate,
+        "return-date": rdate,
+      }
+    )
+    .catch((e) => alert(e.message));
+};
 export {
   createBook,
   createRecord,
@@ -274,5 +291,5 @@ export {
   deleteissued,
   updateBook,
   updateRecord,
-  updateIssued
+  updateIssued,
 };
