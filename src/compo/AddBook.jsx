@@ -53,10 +53,10 @@ export default function AddBook() {
                                 Fill the form
                                 <Modal show={error} onHide={() => setError(false)}>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>{errorString === "" ? "Success" : "Failed"} </Modal.Title>
+                                        <Modal.Title>{errorString } </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <p>Your operation was {errorString === "" ? "Successfull." : " Failed !"}</p>
+                                        <p>Your operation was completed !</p>
                                         <p>{errorString}</p>
                                     </Modal.Body>
                                     <Modal.Footer>
