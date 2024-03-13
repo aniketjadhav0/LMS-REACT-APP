@@ -92,7 +92,7 @@ export default function ManageIssueBook() {
                         <div className="col-md-12">
                             <div className="card">
                                 <div className="card-header">
-                                    All Students
+                                   Students Issued Books 
                                 </div>
                                 <div className="card-body">
                                     <table className="table">

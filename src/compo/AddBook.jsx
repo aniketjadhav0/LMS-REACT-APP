@@ -166,7 +166,7 @@ export default function AddBook() {
                                         </div>
 
                                         <div className="col-md-12">
-                                            <button onClick={addBook} type="submit" className="btn btn-success">Publish</button>
+                                            <button onClick={addBook} type="submit" className="btn btn-success me-2">Publish </button>
                                             <button onClick={reset} className="btn btn-secondary">Cancel</button>
                                         </div>
 

@@ -155,7 +155,7 @@ export default function AddRecord() {
                                         </div>
 
                                         <div className="col-md-12">
-                                            <button type="submit" onClick={addRecord} className="btn btn-success">Publish</button>
+                                            <button type="submit" onClick={addRecord} className="btn btn-success me-2">Publish</button>
                                             <button type="reset" onClick={reset} className="btn btn-secondary">Cancel</button>
                                         </div>
 

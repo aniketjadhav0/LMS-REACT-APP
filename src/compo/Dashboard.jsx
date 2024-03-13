@@ -195,7 +195,7 @@ export default function Dashboard() {
                                             </thead>
                                             <tbody>
                                                 {returnbook &&
-                                                    returnbook.map((item, index) => {
+                                                    returnbook.slice(0,10).map((item, index) => {
                                                         return (
                                                             <tr>
                                                                 <th scope="row">{index + 1}</th>

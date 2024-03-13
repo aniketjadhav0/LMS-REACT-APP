@@ -159,7 +159,7 @@ export default function IssueBook() {
                                         </div>
 
                                         <div className="col-md-12">
-                                            <button type="submit" onClick={borrow} className="btn btn-success">Submit</button>
+                                            <button type="submit" onClick={borrow} className="btn btn-success me-2">Submit</button>
                                             <button type="reset" onClick={reset} className="btn btn-secondary">Cancel</button>
                                         </div>
 

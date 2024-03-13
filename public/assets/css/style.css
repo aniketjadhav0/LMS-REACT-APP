@@ -20,6 +20,7 @@ body{
 
 .sidebar-nav{
     width: var(--ofconvas-width) !important;
+
 }
 .sidebar-link .right-icon{
     transition: all 0.5s;
