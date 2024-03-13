@@ -2,7 +2,7 @@ import { ID } from "appwrite";
 import { databases } from "./appwrite";
 
 // creation
-const createBook = (bookName, isbn, authorName, PubName, course, sem, cb) => {
+const createBook = (bookName, isbn, authorName, PubName, course, bNum, cb) => {
   databases
     .createDocument(
       String(process.env.REACT_APP_DATABASE_ID),
@@ -14,12 +14,12 @@ const createBook = (bookName, isbn, authorName, PubName, course, sem, cb) => {
         "author-name": authorName,
         "publisher-name": PubName,
         course: [course],
-        semester: [sem],
+        "book-number": bNum,
       }
     )
     .catch((er) => {
       cb(er.message);
-      // console.log(er.message);
+      console.log(er.message);
     });
   // databases.createDocument()
 };
@@ -68,7 +68,11 @@ const issueBook = (bookName, stdName, idate, rdate , email, cb) => {
   // databases.createDocument()
 };
 const createRecord = (stdName, enr, email, mob, course, sem, cb) => {
-  databases
+  let isUnque = false;
+  
+  if (isUnque) {
+    
+    databases
     .createDocument(
       process.env.REACT_APP_DATABASE_ID,
       process.env.REACT_APP_STD,
@@ -86,6 +90,8 @@ const createRecord = (stdName, enr, email, mob, course, sem, cb) => {
     .catch((er) => {
       cb(er.message);
     });
+  }
+
 };
 // listing operation
 
@@ -210,7 +216,7 @@ const delRet = (id) => {
     });
 };
 // edit or update operations
-const updateBook = (id, bookName, isbn, authorName, PubName) => {
+const updateBook = (id, bookName, isbn, authorName, PubName,bNum) => {
   databases.updateDocument(
     process.env.REACT_APP_DATABASE_ID,
     process.env.REACT_APP_BOOK,
@@ -219,7 +225,8 @@ const updateBook = (id, bookName, isbn, authorName, PubName) => {
       "book-name": bookName,
       "ISBN-number": isbn,
       "author-name": authorName,
-      "publisher-name": PubName
+      "publisher-name": PubName,
+      "book-number": bNum
     }
   ).catch(e=>alert(e.message))
 

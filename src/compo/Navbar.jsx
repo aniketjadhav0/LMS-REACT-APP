@@ -37,7 +37,7 @@ export default function Navbar() {
     const searchdb = () => {
         if (search.length > 0) {
             const data = databases.listDocuments(process.env.REACT_APP_DATABASE_ID, process.env.REACT_APP_BOOK,
-                [Query.search("book-name", search)]
+                [Query.search("book-number", search)]
             )
             data.catch(e => {
                 alert(e.message)

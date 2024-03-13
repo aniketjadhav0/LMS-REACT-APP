@@ -32,6 +32,43 @@ export default function AddRecord() {
         setCourse("")
     }
 
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = function(event) {
+            const csvData = event.target.result;
+            const rows = csvData.split('\n');
+            const dataArray = [];
+    
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i].trim();
+                if (row !== '') {
+                    const columns = row.split(',');
+                    dataArray.push(columns);
+                }
+            }
+    
+            // console.log(dataArray); // Output the array of arrays representing CSV data
+            for (var a = 0; a < dataArray.length; a++){
+                console.log(dataArray[a])
+                createRecord(dataArray[a][0],
+                dataArray[a][1],
+                dataArray[a][2],
+                dataArray[a][3],
+                dataArray[a][4],
+                dataArray[a][5],
+                )
+            }
+
+        };
+    
+        reader.readAsText(file);
+    }
+    
+    // Example usage: Attach this function to a file input field's onChange event
+    // <input type="file" onChange={handleFileUpload} />
+    
     return (
         <main className="mt-1 pt-3">
             <div className="container-fluid">
@@ -40,7 +77,14 @@ export default function AddRecord() {
                 <div className="row dashboard-counts">
                     <div className="col-md-12">
                         <h4 className="fw-bold text-uppercase"> Add Student </h4>
+
+                        <div>
+                            <input type="file" onChange={handleFileUpload} className="form-control-file mt-2" />
+                        </div>
+
                     </div>
+                    
+
                     <div className="col-md-12">
 
 

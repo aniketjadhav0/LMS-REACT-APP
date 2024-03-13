@@ -9,6 +9,7 @@ export default function ManBooks() {
     const [editedISBN, setEditedISBN] = useState('');
     const [editedPublisherName, setEditedPublisherName] = useState('');
     const [editedAuthorName, setEditedAuthorName] = useState('');
+    const [editedBookNum, seteditedBookNum] = useState('');
 
     useEffect(() => {
         listBooks(res => {
@@ -23,6 +24,7 @@ export default function ManBooks() {
         setEditedISBN(books[index]["ISBN-number"]);
         setEditedPublisherName(books[index]["publisher-name"]);
         setEditedAuthorName(books[index]["author-name"]);
+        setEditedAuthorName(books[index]["book-number"]);
     };
 
     const updateBookData = (index) => {
@@ -35,10 +37,11 @@ export default function ManBooks() {
                 "ISBN-number": editedISBN,
                 "publisher-name": editedPublisherName,
                 "author-name": editedAuthorName,
+                "book-number": editedBookNum,
             };
             return updatedBooks;
         });
-        updateBook(books[index]["$id"], editedBookName, editedISBN, editedAuthorName, editedPublisherName)
+        updateBook(books[index]["$id"], editedBookName, editedISBN, editedAuthorName, editedPublisherName,editedBookNum)
         // Clear the editable state
         setEditableBook(null);
     };
@@ -61,6 +64,7 @@ export default function ManBooks() {
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Book Name</th>
+                                                <th scope="col">Book Number</th>
                                                 <th scope="col">ISBN Number</th>
                                                 <th scope="col">Publisher Name</th>
                                                 <th scope="col">Author Name</th>
@@ -82,6 +86,18 @@ export default function ManBooks() {
                                                                 />
                                                             ) : (
                                                                 item["book-name"]
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {editableBook === index ? (
+                                                                <input
+                                                                    type="text"
+                                                                    style={{ border: "none" }}
+                                                                    value={editedBookNum}
+                                                                    onChange={(e) => seteditedBookNum(e.target.value)}
+                                                                />
+                                                            ) : (
+                                                                item["book-number"]
                                                             )}
                                                         </td>
                                                         <td>

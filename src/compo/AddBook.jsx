@@ -150,18 +150,14 @@ export default function AddBook() {
                                         <div className="col-md-6">
                                             <div className="mb-3">
                                                 <label for="exampleInputPassword1"
-                                                    className="form-label">Semester</label>
+                                                    className="form-label">Book Number</label>
 
-                                                <select className="form-control"
-                                                    value={sem} onChange={(e) => { setSem(e.target.value) }}>
-                                                    <option value=""> Select Semester </option>
-                                                    <option value="First"> First Semester </option>
-                                                    <option value="Second"> Second Semester</option>
-                                                    <option value="Third"> Third Semester</option>
-                                                    <option value="Fourth"> Fourth Semester</option>
-                                                    <option value="Fifth"> Fifth Semester</option>
-                                                    <option value="Sixth"> Sixth Semester </option>
-                                                </select>
+                                                <input type="text" value={sem} onChange={(e) => { setSem(e.target.value) }}>
+                                                    
+                                                </input>
+                                                
+                                                
+
                                             </div>
                                         </div>
 
