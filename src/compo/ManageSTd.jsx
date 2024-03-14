@@ -83,7 +83,7 @@ export default function ManageSTd() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {isRecordsLoaded ? (
+                                            {(isRecordsLoaded && records) ? (
                                                 records.map((item, index) => (
                                                     <tr key={index}>
                                                         <th scope="row">{index + 1}</th>
