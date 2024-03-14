@@ -187,6 +187,7 @@ export default function Dashboard() {
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Book Name</th>
+                                                    <th scope="col">Book Number</th>
                                                     <th scope="col">Student Name</th>
                                                     <th scope="col">Issued Date</th>
                                                     <th scope="col">Return Date</th>
@@ -200,6 +201,7 @@ export default function Dashboard() {
                                                             <tr>
                                                                 <th scope="row">{index + 1}</th>
                                                                 <td>{item["book-name"]}</td>
+                                                                <td>{item["book-number"]}</td>
                                                                 <td>{item["student-name"]}</td>
                                                                 <td>{item["issued-date"]}</td>
                                                                 <td>{item["return-date"]}</td>

@@ -86,6 +86,7 @@ const createRecord = (stdName, enr, email, mob, course, sem, cb) => {
     })
     .catch((er) => {
       isUnque = false;
+      console.log(er);
     });
   if (isUnque) {
     databases
