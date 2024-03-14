@@ -95,6 +95,8 @@ const createRecord = (stdName, enr, email, mob, course, sem, cb) => {
           .catch((er) => {
             cb(er.message);
           });
+      } else {
+        cb("Enrollment Alrady exist");
       }
     })
     .catch((er) => {
