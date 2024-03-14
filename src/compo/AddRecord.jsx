@@ -37,7 +37,7 @@ export default function AddRecord() {
     function handleFileUpload(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
-    
+        alert("Importing data ... ")
         reader.onload = function(event) {
             const csvData = event.target.result;
             const rows = csvData.split('\n');
@@ -62,8 +62,8 @@ export default function AddRecord() {
                 dataArray[a][5],
                 )
             }
-
-        };
+            alert("Data Imported Successfully")
+        };  
     
         reader.readAsText(file);
     }
