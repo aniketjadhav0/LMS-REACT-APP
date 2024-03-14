@@ -68,41 +68,45 @@ const issueBook = (bookName, stdName, idate, rdate, email, cb) => {
   // databases.createDocument()
 };
 const createRecord = (stdName, enr, email, mob, course, sem, cb) => {
+  let isUnque = false;
   // checking if the enrollment already exists or not
   databases
     .listDocuments(
       process.env.REACT_APP_DATABASE_ID,
       process.env.REACT_APP_STD,
-      [Query.equal("enrollment-number", enr)]
+      [Query.equal("enr", enr)]
     )
     .then((res) => {
       console.log(res);
       if (res.documents.length === 0) {
-        databases
-          .createDocument(
-            process.env.REACT_APP_DATABASE_ID,
-            process.env.REACT_APP_STD,
-            ID.unique(),
-            {
-              "student-name": stdName,
-              "enrollment-number": enr,
-              "email-address": email,
-              "phone-number": mob,
-              course: course,
-              semester: sem,
-            }
-          )
-          .catch((er) => {
-            cb(er.message);
-          });
+        isUnque = true;
       } else {
-        cb("Enrollment number already exists");
+        isUnque = false;
       }
     })
     .catch((er) => {
-      cb(er.message);
-      alert(er.message);
+      isUnque = false;
+      console.log(er);
     });
+  if (isUnque) {
+    databases
+      .createDocument(
+        process.env.REACT_APP_DATABASE_ID,
+        process.env.REACT_APP_STD,
+        ID.unique(),
+        {
+          "student-name": stdName,
+          "enrollment-number": enr,
+          "email-address": email,
+          "phone-number": mob,
+          course: course,
+          semester: sem,
+        }
+      )
+      .catch((er) => {
+        cb(er.message);
+      });
+  }
 };
 // listing operation
 
