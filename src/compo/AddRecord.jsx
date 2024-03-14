@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { createRecord } from '../appwrite/database';
 import { Modal, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
 
 export default function AddRecord() {
     const [stdName, setStdName] = useState("");
@@ -73,20 +75,27 @@ export default function AddRecord() {
         <main className="mt-1 pt-3">
             <div className="container-fluid">
 
-
                 <div className="row dashboard-counts">
-                    <div className="col-md-12">
-                        <h4 className="fw-bold text-uppercase"> Add Student </h4>
+                    <div className="col-md-12 d-flex align-items-center justify-content-between" >
+                        <h4 className="fw-bold text-uppercase fw-bold text-uppercase mb-0"> Add Student </h4>
 
                         <div>
-                            <input type="file" onChange={handleFileUpload} className="form-control-file mt-2" />
+                            <label htmlFor="file-upload" className="btn btn-success">
+                                <FontAwesomeIcon icon={faFileCsv} className="me-2" />
+                                Import CSV File
+                            </label>
+                            <input
+                                type="file"
+                                id="file-upload"
+                                onChange={handleFileUpload}
+                                className="form-control-file mt-2"
+                                style={{ display: "none" }}
+                            />
                         </div>
 
                     </div>
-                    
 
                     <div className="col-md-12">
-
 
                         <div className="card">
                             <div className="card-header">

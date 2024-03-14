@@ -88,6 +88,21 @@ export default function AddBook() {
                                         <div className="col-md-6">
                                             <div className="mb-3">
                                                 <label for="exampleInputPassword1"
+                                                    className="form-label">Book Number</label>
+
+                                                <input type="text"
+                                                    className="form-control"
+                                                    value={sem}
+                                                    onChange={(e) => setSem(e.target.value)}
+                                                    id="exampleInputPassword1" />
+                                            </div>
+                                        </div>
+
+                                        
+
+                                        <div className="col-md-6">
+                                            <div className="mb-3">
+                                                <label for="exampleInputPassword1"
                                                     className="form-label">ISBN Number</label>
 
                                                 <input type="text"
@@ -147,19 +162,7 @@ export default function AddBook() {
                                             </div>
                                         </div>
 
-                                        <div className="col-md-6">
-                                            <div className="mb-3">
-                                                <label for="exampleInputPassword1"
-                                                    className="form-label">Book Number</label>
-
-                                                <input type="text" value={sem} onChange={(e) => { setSem(e.target.value) }}>
-                                                    
-                                                </input>
-                                                
-                                                
-
-                                            </div>
-                                        </div>
+                                        
 
                                         <div className="col-md-12">
                                             <button onClick={addBook} type="submit" className="btn btn-success me-2">Publish </button>
