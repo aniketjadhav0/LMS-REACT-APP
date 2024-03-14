@@ -10,6 +10,7 @@ export default function ManageSTd() {
         "enrollment-number": '',
         "email-address": '',
         "phone-number": '',
+        "semester":""
     });
 
     useEffect(() => {
@@ -27,6 +28,7 @@ export default function ManageSTd() {
             "enrollment-number": records[index]["enrollment-number"],
             "email-address": records[index]["email-address"],
             "phone-number": records[index]["phone-number"],
+            "semester":records[index]["semester"]
         });
     };
 
@@ -42,6 +44,7 @@ export default function ManageSTd() {
                 "enrollment-number": editedData["enrollment-number"],
                 "email-address": editedData["email-address"],
                 "phone-number": editedData["phone-number"],
+                semester:editedData["semester"]
             };
             return updatedRecords;
         });
@@ -51,6 +54,7 @@ export default function ManageSTd() {
              editedData["enrollment-number"],
             editedData["email-address"],
              editedData["phone-number"],
+             editedData["semester"],
         );
         
         // Clear the editable state
@@ -79,6 +83,7 @@ export default function ManageSTd() {
                                                 <th scope="col">Enrollment Number</th>
                                                 <th scope="col">Email Address</th>
                                                 <th scope="col">Phone Number</th>
+                                                <th scope="col">Semester</th>
                                                 <th scope="col">Action </th>
                                             </tr>
                                         </thead>
@@ -129,6 +134,17 @@ export default function ManageSTd() {
                                                                 />
                                                             ) : (
                                                                 item["phone-number"]
+                                                            )}
+                                                        </td>
+                                                        <td>
+                                                            {editableRecord === index ? (
+                                                                <input
+                                                                    type="text"
+                                                                    value={editedData["phone-number"]}
+                                                                    onChange={(e) => setEditedData({ ...editedData, "semester": e.target.value })}
+                                                                />
+                                                            ) : (
+                                                                item["semester"]
                                                             )}
                                                         </td>
                                                         <td>

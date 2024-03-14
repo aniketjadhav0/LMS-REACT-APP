@@ -54,7 +54,8 @@ export default function AddRecord() {
             // console.log(dataArray); // Output the array of arrays representing CSV data
             for (var a = 0; a < dataArray.length; a++){
                 console.log(dataArray[a])
-                createRecord(dataArray[a][0],
+                createRecord
+                (dataArray[a][0],
                 dataArray[a][1],
                 dataArray[a][2],
                 dataArray[a][3],
