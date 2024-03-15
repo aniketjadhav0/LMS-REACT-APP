@@ -26,7 +26,7 @@ export default function AddBook() {
     }
     const addBook = () => {
         if (bookName !== "" && isbn !== "" && PubName !== "" && course !== "" && sem !== "" && authorName !== "") {
-            createBook(bookName, isbn, authorName, PubName, course, sem, (e) => setString(e))
+            createBook(bookName, isbn, authorName, PubName, course, sem, (e) => {setString(e); setError(true)})
         } else {
             setString("Please fill all the fields")
             setError(true);

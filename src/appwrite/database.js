@@ -4,23 +4,37 @@ import { databases } from "./appwrite";
 // creation
 const createBook = (bookName, isbn, authorName, PubName, course, bNum, cb) => {
   databases
-    .createDocument(
-      String(process.env.REACT_APP_DATABASE_ID),
+    .listDocuments(
+       process.env.REACT_APP_DATABASE_ID,
       process.env.REACT_APP_BOOK,
-      ID.unique(),
-      {
-        "book-name": bookName,
-        "ISBN-number": isbn,
-        "author-name": authorName,
-        "publisher-name": PubName,
-        course: [course],
-        "book-number": bNum,
-      }
+      [Query.equal("book-number", bNum)]
     )
-    .catch((er) => {
-      cb(er.message);
-      console.log(er.message);
+    .then((res) => {
+      console.log(res);
+      if (res.total > 0) {
+        cb("Book already exists");
+        return;
+      }
+      databases
+        .createDocument(
+          String(process.env.REACT_APP_DATABASE_ID),
+          process.env.REACT_APP_BOOK,
+          ID.unique(),
+          {
+            "book-name": bookName,
+            "ISBN-number": isbn,
+            "author-name": authorName,
+            "publisher-name": PubName,
+            course: [course],
+            "book-number": bNum,
+          }
+        ).then(res=>{cb("success")})
+        .catch((er) => {
+          cb(er.message);
+          console.log(er.message);
+        });
     });
+
   // databases.createDocument()
 };
 
