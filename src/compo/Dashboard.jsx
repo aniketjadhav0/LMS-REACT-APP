@@ -100,7 +100,7 @@ export default function Dashboard() {
                                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                                     <li className="nav-item" role="presentation">
                                         <button className="nav-link text-uppercase active" id="new-students" data-bs-toggle="tab" data-bs-target="#new-students-pane" type="button" role="tab" aria-controls="new-students-pane" aria-selected="true">
-                                            New Students
+                                            New Books
                                         </button>
                                     </li>
                                     <li className="nav-item" role="presentation">
@@ -121,6 +121,7 @@ export default function Dashboard() {
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Book Name</th>
+                                                    <th scope="col">Book Number</th>
                                                     <th scope="col">ISBN NO</th>
                                                     <th scope="col">PUB NO</th>
                                                     <th scope="col">AUTHOR NAME</th>
@@ -134,6 +135,7 @@ export default function Dashboard() {
                                                             <tr>
                                                                 <th scope="row">{index + 1}</th>
                                                                 <td>{item["book-name"]}</td>
+                                                                <td>{item["book-number"]}</td>
                                                                 <td>{item["ISBN-number"]}</td>
                                                                 <td>{item["publisher-name"]}</td>
                                                                 <td>{item["author-name"]}</td>
@@ -170,7 +172,7 @@ export default function Dashboard() {
                                                                 <th scope="row">{index + 1}</th>
                                                                 <td>{item["student-name"]}</td>
                                                                 <td>{item["book-name"]}</td>
-                                                                <td>{item["issued-date"]}</td>
+                                                                <td>{item["Issued-date"]}</td>
                                                                 <td>{item["return-date"]}</td>
                                                             </tr>
                                                         )
